@@ -119,5 +119,5 @@ export const getMenuItems = async () => {
       href: `/${page.slug}`,
     }));
 
-  return [{ label: 'Home', href: '/' }, { label: 'News', href: '/' }, ...topPages];
+  return [{ label: 'Home', href: '/' }, { label: 'News', href: '/news' }, ...topPages];
 };

@@ -44,7 +44,7 @@ export default async function DynamicPage({ params }: Props) {
     <main className="mx-auto w-full max-w-4xl px-4 py-8">
       <article className="rounded-lg border bg-white p-6">
         <h1 className="mb-6 text-3xl font-bold text-blue-900" dangerouslySetInnerHTML={{ __html: page.title }} />
-        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: page.content || page.excerpt }} />
+        <div className="content-html" dangerouslySetInnerHTML={{ __html: page.content || page.excerpt }} />
       </article>
     </main>
   );

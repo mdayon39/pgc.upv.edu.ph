@@ -36,7 +36,7 @@ export default async function NewsDetailPage({ params }: Props) {
       <article className="rounded-lg border bg-white p-6">
         <h1 className="mb-2 text-3xl font-bold text-blue-900" dangerouslySetInnerHTML={{ __html: post.title }} />
         <p className="mb-6 text-sm text-gray-500">{new Date(post.date).toLocaleDateString()}</p>
-        <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div className="content-html" dangerouslySetInnerHTML={{ __html: post.content }} />
       </article>
     </main>
   );
