@@ -1,21 +1,24 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import SiteHeader from "@/components/site-header";
+import type { Metadata } from 'next';
+import { Roboto, Roboto_Slab } from 'next/font/google';
+import './globals.css';
+import SiteHeader from '@/components/site-header';
+import SiteFooter from '@/components/site-footer';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const roboto = Roboto({
+  variable: '--font-roboto',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '700', '900'],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const robotoSlab = Roboto_Slab({
+  variable: '--font-roboto-slab',
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
 });
 
 export const metadata: Metadata = {
-  title: "PGC UPV",
-  description: "Philippine Genome Center Visayas",
+  title: 'PGC UPV',
+  description: 'Philippine Genome Center Visayas',
 };
 
 export default function RootLayout({
@@ -25,11 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${roboto.variable} ${robotoSlab.variable} antialiased`}>
         <SiteHeader />
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

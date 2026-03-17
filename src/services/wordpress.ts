@@ -110,19 +110,71 @@ export const getPageBySlug = async (slug: string) => {
   return pages.find((page) => page.slug === slug) ?? null;
 };
 
+type MenuItem = {
+  label: string;
+  href: string;
+  children?: MenuItem[];
+};
+
 export const getMenuItems = async () => {
   const pages = await getAllPages();
-  const blocked = new Set(['privacy-policy', 'sample-page']);
+  const bySlug = new Map(
+    pages.map((page) => [
+      page.slug,
+      {
+        slug: page.slug,
+        label: page.title.replace(/&#8217;/g, "'").replace(/&#038;/g, '&'),
+      },
+    ]),
+  );
 
-  const topPages = pages
-    .filter((page) => page.parent === 0)
-    .filter((page) => !blocked.has(page.slug))
-    .sort((a, b) => a.title.localeCompare(b.title))
-    .slice(0, 8)
-    .map((page) => ({
-      label: page.title.replace(/&#8217;/g, "'").replace(/&#038;/g, '&'),
-      href: `/${page.slug}`,
-    }));
+  const linkFor = (slug: string, fallbackLabel: string): MenuItem => {
+    const matched = bySlug.get(slug);
+    return {
+      label: matched?.label ?? fallbackLabel,
+      href: `/${slug}`,
+    };
+  };
 
-  return [{ label: 'Home', href: '/' }, { label: 'News', href: '/news' }, ...topPages];
+  const menu: MenuItem[] = [
+    { label: 'HOME', href: '/' },
+    {
+      ...linkFor('about-2', 'ABOUT'),
+      children: [
+        linkFor('history', 'History'),
+        linkFor('mision-vision', 'Mission & Vision'),
+        linkFor('team', 'Team'),
+        linkFor('pgc-visayas-organizational-structure', 'Organizational Structure'),
+      ],
+    },
+    {
+      ...linkFor('pgc-visayas-services', 'SERVICES'),
+      children: [
+        linkFor('services-sequencing-services', 'Sequencing'),
+        linkFor('services-laboratory-equipment', 'Laboratory Equipment'),
+        linkFor('sample-storage', 'Sample Storage'),
+        linkFor('services-retail-services', 'Retail Services'),
+        linkFor('services-sample-processing-service', 'Sample Processing'),
+        linkFor('services-bioinformatics-laboratory-services', 'Bioinformatics Services'),
+      ],
+    },
+    {
+      ...linkFor('opportunities', 'OPPORTUNITIES'),
+      children: [
+        linkFor('internship', 'Internship'),
+        linkFor('trainings', 'Trainings'),
+      ],
+    },
+    {
+      ...linkFor('consortium', 'CONSORTIUM'),
+      children: [
+        linkFor('capacity-building-scheme', 'Capacity Building Scheme'),
+        linkFor('faqs-consortium-membership', 'Consortium Membership'),
+      ],
+    },
+    { label: 'NEWS', href: '/news' },
+    linkFor('contact', 'CONTACT'),
+  ];
+
+  return menu;
 };
