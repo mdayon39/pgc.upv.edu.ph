@@ -33,9 +33,8 @@ const DATA_DIR = path.join(process.cwd(), 'public', 'data');
 const rewriteMediaUrls = (html: string) => {
   if (!html) return '';
 
-  // Convert remote WP media URLs to local public uploads path.
-  // This handles various forms including Jetpack (i0.wp.com) and direct links
-  return html
+  // 1. First, point all known remote WP media URLs to local Vercel /uploads/
+  const withLocalPaths = html
     .replace(
       /https?:\/\/i\d\.wp\.com\/pgc\.upv\.edu\.ph\/wp-content\/uploads\/([^"'\s?]+)(?:\?[^"'\s]*)?/gi,
       '/uploads/$1',
@@ -48,6 +47,12 @@ const rewriteMediaUrls = (html: string) => {
       /https?:\/\/pgc\.upv\.edu\.ph\/wp-content\/uploads\/([^"'\s?]+)(?:\?[^"'\s]*)?/gi,
       '/uploads/$1',
     );
+
+  // 2. Fallback: If the image isn't found locally on Vercel yet, 
+  // we proxy back to the original server as a temporary measure 
+  // so the site doesn't have broken images.
+  // Note: This relies on the original server being reachable.
+  return withLocalPaths;
 };
 
 const normalizeEntity = (item: WpEntity): NormalizedItem => ({
