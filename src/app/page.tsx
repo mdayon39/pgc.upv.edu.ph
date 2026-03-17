@@ -32,6 +32,8 @@ export default async function Home() {
               <img
                 src={block.imageUrl}
                 alt={block.title}
+                loading="lazy"
+                decoding="async"
                 className="h-48 w-full object-cover"
               />
             ) : <div className="h-48 w-full bg-[linear-gradient(120deg,#dbeafe,#e2e8f0)]" />}
@@ -69,6 +71,8 @@ export default async function Home() {
                   <img
                     src={post.featuredImage.node.sourceUrl}
                     alt={post.title}
+                    loading="lazy"
+                    decoding="async"
                     className="h-56 w-full object-cover"
                   />
                 )}

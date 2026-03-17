@@ -19,7 +19,7 @@ export default function ContactForm() {
 
   if (status === 'success') {
     return (
-      <div className="rounded-lg border border-green-200 bg-green-50 p-8 text-center">
+      <div className="rounded-lg border border-green-200 bg-green-50 p-8 text-center" role="status" aria-live="polite">
         <h3 className="text-xl font-bold text-green-800">Message Sent!</h3>
         <p className="mt-2 text-green-700">Thank you for contacting PGC Visayas. We will get back to you soon.</p>
         <button 
@@ -40,6 +40,7 @@ export default function ContactForm() {
           id="name"
           name="name"
           type="text"
+          autoComplete="name"
           required
           placeholder="Juan Dela Cruz"
           className="rounded border border-slate-300 px-4 py-2.5 text-sm focus:border-[#1e4b75] focus:outline-none"
@@ -51,6 +52,7 @@ export default function ContactForm() {
           id="email"
           name="email"
           type="email"
+          autoComplete="email"
           required
           placeholder="juan@example.com"
           className="rounded border border-slate-300 px-4 py-2.5 text-sm focus:border-[#1e4b75] focus:outline-none"
@@ -62,6 +64,7 @@ export default function ContactForm() {
           id="subject"
           name="subject"
           type="text"
+          autoComplete="off"
           required
           placeholder="Inquiry about sequencing services"
           className="rounded border border-slate-300 px-4 py-2.5 text-sm focus:border-[#1e4b75] focus:outline-none"

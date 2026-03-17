@@ -53,6 +53,9 @@ export default function HomeSlider() {
           <img
             src={slide.image}
             alt={slide.title}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            fetchPriority={index === 0 ? 'high' : 'auto'}
+            decoding="async"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(7,22,40,0.88)_0%,rgba(7,22,40,0.74)_42%,rgba(7,22,40,0.38)_74%,rgba(7,22,40,0.2)_100%)]" />
