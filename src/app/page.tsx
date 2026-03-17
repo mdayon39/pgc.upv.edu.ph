@@ -1,31 +1,50 @@
 import { getPosts } from '@/services/wordpress';
 import Link from 'next/link';
 import HomeSlider from '@/components/home-slider';
+import { getManagedContentBlocks } from '@/lib/site-config';
+
+type PostNode = {
+  id: number | string;
+  title: string;
+  excerpt: string;
+  slug: string;
+  date: string;
+  featuredImage?: {
+    node?: {
+      sourceUrl?: string;
+    };
+  } | null;
+};
 
 export default async function Home() {
-  const data = await getPosts();
-  const posts = (data.posts.nodes || []).slice(0, 8);
+  const [data, blocks] = await Promise.all([getPosts(), getManagedContentBlocks()]);
+  const posts: PostNode[] = (data.posts.nodes || []).slice(0, 8);
+  const enabledBlocks = blocks.filter((block) => block.enabled).slice(0, 3);
 
   return (
     <main>
       <HomeSlider />
 
       <section className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-10 md:grid-cols-3">
-        <article className="rounded-lg border border-slate-200 bg-white p-6">
-          <h2 className="text-lg font-bold text-[#002560]">Services</h2>
-          <p className="mt-2 text-sm text-slate-600">Access sequencing, laboratory equipment, storage, and bioinformatics support.</p>
-          <Link href="/pgc-visayas-services" className="mt-4 inline-block text-sm font-semibold text-[#1e4b75] hover:underline">Learn more</Link>
-        </article>
-        <article className="rounded-lg border border-slate-200 bg-white p-6">
-          <h2 className="text-lg font-bold text-[#002560]">Opportunities</h2>
-          <p className="mt-2 text-sm text-slate-600">Find internship, training, and capacity-building opportunities for students and researchers.</p>
-          <Link href="/opportunities" className="mt-4 inline-block text-sm font-semibold text-[#1e4b75] hover:underline">Explore opportunities</Link>
-        </article>
-        <article className="rounded-lg border border-slate-200 bg-white p-6">
-          <h2 className="text-lg font-bold text-[#002560]">Contact</h2>
-          <p className="mt-2 text-sm text-slate-600">Coordinate with PGC Visayas for project inquiries, collaborations, and service requests.</p>
-          <Link href="/contact" className="mt-4 inline-block text-sm font-semibold text-[#1e4b75] hover:underline">Get in touch</Link>
-        </article>
+        {enabledBlocks.map((block) => (
+          <article key={block.id} className="rounded-lg border border-slate-200 bg-white p-6">
+            {block.imageUrl ? (
+              <img
+                src={block.imageUrl}
+                alt={block.title}
+                className="mb-4 h-36 w-full rounded-md object-cover"
+              />
+            ) : null}
+            <h2 className="text-lg font-bold text-[#002560]">{block.title}</h2>
+            <p className="mt-2 text-sm text-slate-600">{block.description}</p>
+            <Link
+              href={block.href || '#'}
+              className="mt-4 inline-block text-sm font-semibold text-[#1e4b75] hover:underline"
+            >
+              Learn more
+            </Link>
+          </article>
+        ))}
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 pb-16">
@@ -41,7 +60,7 @@ export default async function Home() {
 
         <section className="grid gap-6 md:grid-cols-2">
           {posts.length > 0 ? (
-            posts.map((post: any) => (
+            posts.map((post) => (
               <article key={post.id} className="group overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-md">
                 {post.featuredImage?.node?.sourceUrl && (
                   <img

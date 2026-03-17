@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getAllPosts, getPostBySlug } from '@/services/wordpress';
+import Link from 'next/link';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -65,9 +66,9 @@ export default async function NewsDetailPage({ params }: Props) {
           <div className="content-html" dangerouslySetInnerHTML={{ __html: post.content }} />
           
           <footer className="mt-12 pt-8 border-t border-gray-100 flex justify-between items-center">
-             <a href="/news" className="text-blue-700 hover:text-blue-900 font-medium flex items-center transition-colors">
+             <Link href="/news" className="text-blue-700 hover:text-blue-900 font-medium flex items-center transition-colors">
                ← Back to News
-             </a>
+             </Link>
              <div className="flex gap-4">
                 {/* Placeholder for social share if needed */}
              </div>

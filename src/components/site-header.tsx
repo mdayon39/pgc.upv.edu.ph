@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { getMenuItems } from '@/services/wordpress';
+import { getManagedMenu } from '@/lib/site-config';
 
 export default async function SiteHeader() {
-  const menuItems = await getMenuItems();
+  const menuItems = await getManagedMenu();
 
   return (
     <header className="border-b border-slate-200 bg-white">
