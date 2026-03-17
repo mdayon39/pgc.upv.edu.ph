@@ -1,5 +1,6 @@
 import { getPosts } from '@/services/wordpress';
 import Link from 'next/link';
+import HomeSlider from '@/components/home-slider';
 
 export default async function Home() {
   const data = await getPosts();
@@ -7,30 +8,7 @@ export default async function Home() {
 
   return (
     <main>
-      <section className="relative overflow-hidden border-b border-slate-200 bg-[#0f2745]">
-        <img
-          src="/uploads/2025/11/pgcv-1.jpg"
-          alt="Philippine Genome Center Visayas"
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
-        />
-        <div className="relative mx-auto w-full max-w-6xl px-4 py-20 md:py-28">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-100">Philippine Genome Center Visayas</p>
-          <h1 className="mt-3 max-w-3xl font-[var(--font-roboto-slab)] text-4xl font-bold leading-tight text-white md:text-5xl">
-            Advancing Genomics Research, Services, and Capacity Building in Western Visayas
-          </h1>
-          <p className="mt-5 max-w-2xl text-blue-50 md:text-lg">
-            Explore our laboratory services, research initiatives, training opportunities, and latest institutional updates.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/pgc-visayas-services" className="rounded bg-[#235787] px-5 py-3 text-sm font-semibold text-white hover:bg-[#1e4b75]">
-              View Services
-            </Link>
-            <Link href="/about-2" className="rounded border border-blue-100/70 px-5 py-3 text-sm font-semibold text-blue-50 hover:bg-white/10">
-              About PGC UPV
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HomeSlider />
 
       <section className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-10 md:grid-cols-3">
         <article className="rounded-lg border border-slate-200 bg-white p-6">
