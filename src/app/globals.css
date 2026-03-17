@@ -124,7 +124,16 @@ body {
 .elementor-widget-image img {
   width: 100%;
   height: auto;
-  border-radius: 9999px; /* for team member icons */
-  max-width: 250px;
-  margin: 0 auto;
+  border-radius: 9999px; /* fallback for team icons */
+  max-width: 100%; /* modified: allow full width for banners */
+  margin: 1.5rem auto;
+}
+
+/* Remove forced circular crop for anything that looks like a service banner */
+.elementor-widget-image img[src*="Banner"], 
+.elementor-widget-image img[src*="scaled"],
+.elementor-widget-image img[src*="Sequencing"] {
+  border-radius: 0.5rem !important;
+  max-width: 100% !important;
+}
 }

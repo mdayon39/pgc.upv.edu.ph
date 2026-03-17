@@ -41,26 +41,34 @@ export default async function DynamicPage({ params }: Props) {
   }
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-8">
-      <article className="rounded-lg border bg-white shadow-sm overflow-hidden">
+    <main className="mx-auto w-full max-w-7xl px-4 py-10">
+      <article className="rounded-2xl border bg-white shadow-lg overflow-hidden transition-all">
         {page.featuredImage && (
-          <div className="relative h-48 md:h-64 w-full">
+          <div className="relative h-[300px] md:h-[480px] w-full">
             <img
               src={page.featuredImage}
               alt={page.title}
               className="w-full h-full object-cover"
             />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-6 md:p-12 text-center">
+              <h1 
+                className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg leading-tight" 
+                dangerouslySetInnerHTML={{ __html: page.title }} 
+              />
+            </div>
           </div>
         )}
-        <div className="p-6 md:p-12">
-          <header className="mb-10 text-center border-b border-gray-100 pb-8">
-            <h1 
-              className="text-3xl md:text-5xl font-extrabold text-[#002B5B] leading-tight" 
-              dangerouslySetInnerHTML={{ __html: page.title }} 
-            />
-          </header>
+        <div className="p-6 md:p-16">
+          {!page.featuredImage && (
+            <header className="mb-12 text-center border-b border-gray-200 pb-10">
+              <h1 
+                className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#002B5B] leading-tight" 
+                dangerouslySetInnerHTML={{ __html: page.title }} 
+              />
+            </header>
+          )}
           
-          <div className="content-html" dangerouslySetInnerHTML={{ __html: page.content || page.excerpt }} />
+          <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: page.content || page.excerpt }} />
         </div>
       </article>
     </main>
