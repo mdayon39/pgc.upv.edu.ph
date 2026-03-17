@@ -17,13 +17,13 @@ export default async function SiteHeader() {
 
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5">
         <div className="flex items-center gap-3">
-          <img src="/uploads/2025/11/cropped-pgcv-150x150.jpg" alt="PGC UPV Logo" className="h-12 w-12 rounded-full object-cover" />
-          <div>
-            <Link href="/" className="block text-2xl font-bold tracking-tight text-[#002560]">
-              PGC UPV
-            </Link>
-            <p className="text-sm text-slate-600">University of the Philippines Visayas</p>
-          </div>
+          <Link href="/" className="flex items-center gap-3">
+            <img 
+              src="https://i0.wp.com/pgc.upv.edu.ph/wp-content/uploads/2021/07/PGC-VSF_Logo-C-1.png?fit=2551%2C863&ssl=1" 
+              alt="PGC UPV Logo" 
+              className="h-14 w-auto object-contain" 
+            />
+          </Link>
         </div>
 
         <nav className="hidden lg:block">

@@ -139,16 +139,17 @@ export const getMenuItems = async () => {
   const menu: MenuItem[] = [
     { label: 'HOME', href: '/' },
     {
-      ...linkFor('about-2', 'ABOUT'),
+      label: 'ABOUT',
+      href: '/about-2',
       children: [
         linkFor('history', 'History'),
         linkFor('mision-vision', 'Mission & Vision'),
         linkFor('team', 'Team'),
-        linkFor('pgc-visayas-organizational-structure', 'Organizational Structure'),
       ],
     },
     {
-      ...linkFor('pgc-visayas-services', 'SERVICES'),
+      label: 'SERVICES',
+      href: '/pgc-visayas-services',
       children: [
         linkFor('services-sequencing-services', 'Sequencing'),
         linkFor('services-laboratory-equipment', 'Laboratory Equipment'),
@@ -159,21 +160,15 @@ export const getMenuItems = async () => {
       ],
     },
     {
-      ...linkFor('opportunities', 'OPPORTUNITIES'),
+      label: 'CONSORTIUM',
+      href: '/consortium',
       children: [
-        linkFor('internship', 'Internship'),
-        linkFor('trainings', 'Trainings'),
+        linkFor('capacity-building-scheme', 'CAPACITY BUILDING SCHEME'),
       ],
     },
-    {
-      ...linkFor('consortium', 'CONSORTIUM'),
-      children: [
-        linkFor('capacity-building-scheme', 'Capacity Building Scheme'),
-        linkFor('faqs-consortium-membership', 'Consortium Membership'),
-      ],
-    },
-    { label: 'NEWS', href: '/news' },
+    linkFor('faqs', 'FAQs'),
     linkFor('contact', 'CONTACT'),
+    linkFor('opportunities', 'OPPORTUNITIES'),
   ];
 
   return menu;

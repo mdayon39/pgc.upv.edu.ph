@@ -12,16 +12,22 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: '/uploads/2025/11/pgcv-1.jpg',
+    image: 'https://i0.wp.com/pgc.upv.edu.ph/wp-content/uploads/2024/07/5-1-scaled.jpg?fit=2560%2C1229&ssl=1',
     title: 'Advancing Genomics Research in Western Visayas',
     description: 'Providing world-class genomics and bioinformatics services to the scientific community.',
     link: '/pgc-visayas-services',
   },
   {
-    image: '/uploads/2025/11/pgcv.jpg',
+    image: 'https://i0.wp.com/pgc.upv.edu.ph/wp-content/uploads/2024/07/2-1-scaled.jpg?fit=2560%2C1229&ssl=1',
     title: 'Supporting National Health Initiatives',
     description: 'Collaborating with national and international partners for public health genomics.',
     link: '/about-2',
+  },
+  {
+    image: 'https://i0.wp.com/pgc.upv.edu.ph/wp-content/uploads/2024/07/3-1-scaled.jpg?fit=2560%2C1229&ssl=1',
+    title: 'Fisheries and Aquatic Research',
+    description: 'Spearheading the utilization of omics in fisheries and aquatic research in the Philippines.',
+    link: '/pgc-visayas-services',
   }
 ];
 
