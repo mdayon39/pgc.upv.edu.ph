@@ -41,10 +41,27 @@ export default async function DynamicPage({ params }: Props) {
   }
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 py-8">
-      <article className="rounded-lg border bg-white p-6">
-        <h1 className="mb-6 text-3xl font-bold text-blue-900" dangerouslySetInnerHTML={{ __html: page.title }} />
-        <div className="content-html" dangerouslySetInnerHTML={{ __html: page.content || page.excerpt }} />
+    <main className="mx-auto w-full max-w-5xl px-4 py-8">
+      <article className="rounded-lg border bg-white shadow-sm overflow-hidden">
+        {page.featuredImage && (
+          <div className="relative h-48 md:h-64 w-full">
+            <img
+              src={page.featuredImage}
+              alt={page.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        <div className="p-6 md:p-12">
+          <header className="mb-10 text-center border-b border-gray-100 pb-8">
+            <h1 
+              className="text-3xl md:text-5xl font-extrabold text-[#002B5B] leading-tight" 
+              dangerouslySetInnerHTML={{ __html: page.title }} 
+            />
+          </header>
+          
+          <div className="content-html" dangerouslySetInnerHTML={{ __html: page.content || page.excerpt }} />
+        </div>
       </article>
     </main>
   );

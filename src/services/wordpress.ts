@@ -34,6 +34,7 @@ const rewriteMediaUrls = (html: string) => {
   if (!html) return '';
 
   // Convert remote WP media URLs to local public uploads path.
+  // This handles various forms including Jetpack (i0.wp.com) and direct links
   return html
     .replace(
       /https?:\/\/i\d\.wp\.com\/pgc\.upv\.edu\.ph\/wp-content\/uploads\/([^"'\s?]+)(?:\?[^"'\s]*)?/gi,
@@ -41,6 +42,10 @@ const rewriteMediaUrls = (html: string) => {
     )
     .replace(
       /https?:\/\/(?:pgc\.upv\.edu\.ph|127\.0\.0\.1\/wordpress)\/wp-content\/uploads\/([^"'\s?]+)(?:\?[^"'\s]*)?/gi,
+      '/uploads/$1',
+    )
+    .replace(
+      /https?:\/\/pgc\.upv\.edu\.ph\/wp-content\/uploads\/([^"'\s?]+)(?:\?[^"'\s]*)?/gi,
       '/uploads/$1',
     );
 };

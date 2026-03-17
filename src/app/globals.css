@@ -24,13 +24,64 @@ body {
 }
 
 .content-html p {
-  margin: 0 0 1rem;
+  margin: 0 0 1.25rem;
+}
+
+.content-html h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
+  color: #1e3a8a;
+}
+
+.content-html h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.75rem;
+  color: #1e40af;
 }
 
 .content-html img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
+  margin: 1rem auto;
+  display: block;
+}
+
+.content-html figure {
+  margin: 1.5rem 0;
+}
+
+.content-html figcaption {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+.content-html ul, .content-html ol {
+  margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.content-html ul {
+  list-style-type: disc;
+}
+
+.content-html ol {
+  list-style-type: decimal;
+}
+
+.content-html li {
+  margin-bottom: 0.5rem;
+}
+
+.content-html blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1rem;
+  font-style: italic;
+  margin: 1.5rem 0;
+  color: #4b5563;
 }
 
 .content-html a {
