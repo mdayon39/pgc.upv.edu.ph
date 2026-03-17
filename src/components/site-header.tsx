@@ -6,15 +6,6 @@ export default async function SiteHeader() {
 
   return (
     <header className="border-b border-slate-200 bg-white">
-      <div className="bg-[#f8fafc] border-b border-slate-200">
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-2 text-xs text-slate-600">
-          <p>Philippine Genome Center Visayas</p>
-          <Link href="/contact" className="font-medium text-[#1e4b75] hover:underline">
-            Contact Us
-          </Link>
-        </div>
-      </div>
-
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-5">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3">
