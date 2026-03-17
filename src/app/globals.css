@@ -103,3 +103,28 @@ body {
   padding: 0.6rem 0.75rem;
   text-align: left;
 }
+
+/* Replicate Elementor horizontal containers */
+.elementor-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.elementor-column {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.elementor-widget-container p {
+  margin-bottom: 0.5rem;
+}
+
+.elementor-widget-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 9999px; /* for team member icons */
+  max-width: 250px;
+  margin: 0 auto;
+}
