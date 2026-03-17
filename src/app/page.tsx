@@ -1,4 +1,5 @@
 import { getPosts } from '@/services/wordpress';
+import Link from 'next/link';
 
 export default async function Home() {
   const data = await getPosts();
@@ -24,7 +25,9 @@ export default async function Home() {
               />
               <div className="mt-6 flex items-center justify-between text-sm text-gray-500 font-medium">
                 <span>{new Date(post.date).toLocaleDateString()}</span>
-                <span className="text-blue-600">Read more →</span>
+                <Link className="text-blue-600" href={`/news/${post.slug}`}>
+                  Read more →
+                </Link>
               </div>
             </article>
           ))
