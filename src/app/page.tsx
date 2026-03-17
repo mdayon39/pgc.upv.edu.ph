@@ -25,35 +25,38 @@ export default async function Home() {
     <main>
       <HomeSlider />
 
-      <section className="mx-auto grid w-full max-w-6xl gap-6 px-4 py-10 md:grid-cols-3">
+      <section className="mx-auto grid w-full max-w-7xl gap-6 px-4 py-12 md:grid-cols-3">
         {enabledBlocks.map((block) => (
-          <article key={block.id} className="rounded-lg border border-slate-200 bg-white p-6">
+          <article key={block.id} className="group overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
             {block.imageUrl ? (
               <img
                 src={block.imageUrl}
                 alt={block.title}
-                className="mb-4 h-36 w-full rounded-md object-cover"
+                className="h-48 w-full object-cover"
               />
-            ) : null}
-            <h2 className="text-lg font-bold text-[#002560]">{block.title}</h2>
-            <p className="mt-2 text-sm text-slate-600">{block.description}</p>
-            <Link
-              href={block.href || '#'}
-              className="mt-4 inline-block text-sm font-semibold text-[#1e4b75] hover:underline"
-            >
-              Learn more
-            </Link>
+            ) : <div className="h-48 w-full bg-[linear-gradient(120deg,#dbeafe,#e2e8f0)]" />}
+            <div className="p-6">
+              <h2 className="font-[var(--font-roboto-slab)] text-xl font-bold text-[#123b5d]">{block.title}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-600">{block.description}</p>
+              <Link
+                href={block.href || '#'}
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-[#0f4f7c] hover:text-[#0a3c60]"
+              >
+                Learn more
+                <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </article>
         ))}
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 pb-16">
-        <header className="mb-6 flex items-end justify-between border-b border-slate-200 pb-4">
+      <section className="mx-auto w-full max-w-7xl px-4 pb-20">
+        <header className="mb-7 flex items-end justify-between border-b border-slate-200 pb-4">
           <div>
-            <h2 className="font-[var(--font-roboto-slab)] text-3xl font-bold text-[#2b2b2b]">Latest News</h2>
-            <p className="mt-1 text-sm text-slate-600">Updates from the old WordPress archive, now hosted on your new platform.</p>
+            <h2 className="font-[var(--font-roboto-slab)] text-3xl font-bold text-[#153d5f]">Latest News</h2>
+            <p className="mt-2 text-sm text-slate-600">Updates from the old WordPress archive, now hosted on your new platform.</p>
           </div>
-          <Link href="/news" className="text-sm font-semibold text-[#1e4b75] hover:underline">
+          <Link href="/news" className="text-sm font-semibold uppercase tracking-wide text-[#0f4f7c] hover:underline">
             View all
           </Link>
         </header>
@@ -61,24 +64,24 @@ export default async function Home() {
         <section className="grid gap-6 md:grid-cols-2">
           {posts.length > 0 ? (
             posts.map((post) => (
-              <article key={post.id} className="group overflow-hidden rounded-lg border border-slate-200 bg-white transition-shadow hover:shadow-md">
+              <article key={post.id} className="group overflow-hidden rounded-2xl border border-slate-200 bg-white transition-all hover:-translate-y-1 hover:shadow-xl">
                 {post.featuredImage?.node?.sourceUrl && (
                   <img
                     src={post.featuredImage.node.sourceUrl}
                     alt={post.title}
-                    className="h-52 w-full object-cover"
+                    className="h-56 w-full object-cover"
                   />
                 )}
-                <div className="p-5">
-                  <h3 className="text-xl font-bold text-slate-900 transition-colors group-hover:text-[#1e4b75]">
+                <div className="p-6">
+                  <h3 className="font-[var(--font-roboto-slab)] text-2xl font-bold text-slate-900 transition-colors group-hover:text-[#0f4f7c]">
                     <Link href={`/news/${post.slug}`} className="hover:underline">
                       <span dangerouslySetInnerHTML={{ __html: post.title }} />
                     </Link>
                   </h3>
-                  <div className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-700" dangerouslySetInnerHTML={{ __html: post.excerpt }} />
-                  <div className="mt-4 flex items-center justify-between text-xs text-slate-500">
+                  <div className="mt-4 line-clamp-3 text-sm leading-relaxed text-slate-700" dangerouslySetInnerHTML={{ __html: post.excerpt }} />
+                  <div className="mt-5 flex items-center justify-between text-xs text-slate-500">
                     <span>{new Date(post.date).toLocaleDateString()}</span>
-                    <Link className="font-semibold text-[#1e4b75]" href={`/news/${post.slug}`}>
+                    <Link className="font-semibold uppercase tracking-wide text-[#0f4f7c]" href={`/news/${post.slug}`}>
                       Read more
                     </Link>
                   </div>

@@ -42,7 +42,7 @@ export default function HomeSlider() {
   }, []);
 
   return (
-    <div className="relative h-[450px] md:h-[600px] w-full overflow-hidden bg-[#0f2745]">
+    <section className="relative h-[500px] w-full overflow-hidden bg-[#0f2745] md:h-[640px]">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -53,24 +53,31 @@ export default function HomeSlider() {
           <img
             src={slide.image}
             alt={slide.title}
-            className="h-full w-full object-cover opacity-40"
+            className="h-full w-full object-cover"
           />
+          <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(7,22,40,0.88)_0%,rgba(7,22,40,0.74)_42%,rgba(7,22,40,0.38)_74%,rgba(7,22,40,0.2)_100%)]" />
           <div className="absolute inset-0 flex items-center">
-            <div className="mx-auto w-full max-w-6xl px-4 text-white">
-              <div className="max-w-3xl animate-in fade-in slide-in-from-left-4 duration-700">
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-200">Featured</p>
-                <h2 className="mt-4 font-[var(--font-roboto-slab)] text-4xl font-bold leading-tight md:text-6xl">
+            <div className="mx-auto w-full max-w-7xl px-4 text-white">
+              <div className="max-w-3xl rounded-2xl border border-white/15 bg-white/8 p-6 shadow-2xl backdrop-blur-sm animate-in fade-in slide-in-from-left-4 duration-700 md:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-blue-100 md:text-sm">Philippine Genome Center Visayas</p>
+                <h2 className="mt-4 font-[var(--font-roboto-slab)] text-3xl font-bold leading-tight text-white md:text-6xl">
                   {slide.title}
                 </h2>
-                <p className="mt-6 text-lg text-blue-50 md:text-xl">
+                <p className="mt-5 max-w-2xl text-base leading-relaxed text-blue-50 md:text-xl">
                   {slide.description}
                 </p>
-                <div className="mt-10 flex gap-4">
+                <div className="mt-8 flex flex-wrap gap-3 md:mt-10">
                   <Link
                     href={slide.link}
-                    className="rounded bg-[#235787] px-8 py-3.5 text-sm font-bold transition-transform hover:scale-105 active:scale-95"
+                    className="rounded-full bg-[#1f8fd6] px-7 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#1978b4]"
                   >
                     Learn More
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="rounded-full border border-white/45 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/15"
+                  >
+                    Contact Us
                   </Link>
                 </div>
               </div>
@@ -78,7 +85,26 @@ export default function HomeSlider() {
           </div>
         </div>
       ))}
-      
+
+      <div className="absolute inset-x-0 top-1/2 mx-auto flex w-full max-w-7xl -translate-y-1/2 justify-between px-4">
+        <button
+          type="button"
+          onClick={() => setCurrent((prev) => (prev - 1 + slides.length) % slides.length)}
+          className="rounded-full border border-white/35 bg-black/25 px-3 py-2 text-white backdrop-blur hover:bg-black/40"
+          aria-label="Previous slide"
+        >
+          ←
+        </button>
+        <button
+          type="button"
+          onClick={() => setCurrent((prev) => (prev + 1) % slides.length)}
+          className="rounded-full border border-white/35 bg-black/25 px-3 py-2 text-white backdrop-blur hover:bg-black/40"
+          aria-label="Next slide"
+        >
+          →
+        </button>
+      </div>
+
       <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-3">
         {slides.map((_, index) => (
           <button
@@ -91,6 +117,6 @@ export default function HomeSlider() {
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
