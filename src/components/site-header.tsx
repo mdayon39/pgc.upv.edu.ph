@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getManagedMenu } from '@/lib/site-config';
+import SearchBar from '@/components/search-bar';
 
 export default async function SiteHeader() {
   const menuItems = await getManagedMenu();
@@ -57,6 +58,8 @@ export default async function SiteHeader() {
             ))}
           </ul>
         </nav>
+
+        <SearchBar />
 
         <details className="relative lg:hidden">
           <summary className="list-none rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold uppercase tracking-wide text-slate-700 shadow-sm marker:content-none">
