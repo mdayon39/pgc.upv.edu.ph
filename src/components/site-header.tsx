@@ -41,7 +41,7 @@ export default async function SiteHeader() {
                 </Link>
 
                 {item.children && item.children.length > 0 && (
-                  <ul className="invisible absolute left-0 top-full z-50 mt-2 w-72 translate-y-2 rounded-xl border border-slate-200 bg-white p-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  <ul className="invisible absolute left-0 top-full z-50 w-72 translate-y-2 rounded-xl border border-slate-200 bg-white p-2 pt-2 opacity-0 shadow-xl transition-all group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <Link

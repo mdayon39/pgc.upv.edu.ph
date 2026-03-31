@@ -52,7 +52,18 @@ const rewriteMediaUrls = (html: string) => {
   // we proxy back to the original server as a temporary measure 
   // so the site doesn't have broken images.
   // Note: This relies on the original server being reachable.
-  return withLocalPaths;
+
+  // 3. Rewrite old WordPress navigation links to local paths
+  //    e.g. https://pgc.upv.edu.ph/about-2/ → /about-2
+  const withLocalLinks = withLocalPaths.replace(
+    /href=["']https?:\/\/(?:pgc\.upv\.edu\.ph|127\.0\.0\.1\/wordpress)\/([^"'\s#?]*)(?:[?][^"'\s]*)?(?:#[^"'\s]*)?(["'])/gi,
+    (_match, slug, quote) => {
+      const cleanSlug = slug.replace(/\/+$/, '');
+      return `href=${quote}/${cleanSlug}${quote}`;
+    },
+  );
+
+  return withLocalLinks;
 };
 
 const normalizeEntity = (item: WpEntity): NormalizedItem => ({
