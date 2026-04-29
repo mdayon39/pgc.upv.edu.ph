@@ -6,7 +6,26 @@ export default async function SiteHeader() {
     const isConsortium = item.label.trim().toLowerCase() === 'consortium' || item.href.trim().toLowerCase() === '/consortium';
     if (!isConsortium) return item;
 
-    const children = item.children ?? [];
+    const children = (item.children ?? []).map((child) => {
+      const childHref = child.href.trim().toLowerCase();
+      const childLabel = child.label.trim().toLowerCase();
+
+      if (childHref === '/capacity-building-scheme' || childLabel === 'capacity building scheme') {
+        return {
+          ...child,
+          label: 'Capacity Building Scheme',
+        };
+      }
+
+      if (childHref === '/consortium-members' || childLabel === 'consortium members') {
+        return {
+          ...child,
+          label: 'Consortium Members',
+        };
+      }
+
+      return child;
+    });
     const hasConsortiumMembers = children.some((child) => child.href.trim().toLowerCase() === '/consortium-members');
 
     if (hasConsortiumMembers) return item;

@@ -192,7 +192,7 @@ export const getMenuItems = async () => {
       label: 'CONSORTIUM',
       href: '/consortium',
       children: [
-        linkFor('capacity-building-scheme', 'CAPACITY BUILDING SCHEME'),
+        linkFor('capacity-building-scheme', 'Capacity Building Scheme'),
         linkFor('consortium-members', 'Consortium Members'),
       ],
     },
