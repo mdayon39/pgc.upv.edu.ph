@@ -89,15 +89,6 @@ export default async function SiteHeader() {
           </nav>
         </details>
       </div>
-
-      <div className="border-t border-slate-100 bg-[#f8fbff]">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2 text-xs text-slate-600">
-          <p className="font-medium">Genomics and Bioinformatics Services for Research and Public Health</p>
-          <Link href="/news" className="font-semibold text-[#0f4f7c] hover:underline">
-            Latest News
-          </Link>
-        </div>
-      </div>
     </header>
   );
 }
