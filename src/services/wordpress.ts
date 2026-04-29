@@ -115,6 +115,13 @@ export const getPageBySlug = async (slug: string) => {
   const page = pages.find((item) => item.slug === slug);
   if (!page) return null;
 
+  if (slug === 'mision-vision') {
+    return {
+      ...page,
+      content: page.content.replace('responsive to the needs of the Filipinos and the society by 2025.', 'responsive to the needs of the Filipinos and the society.'),
+    };
+  }
+
   if (slug === 'history') {
     const sanitizedContent = page.content
       .replace(/<h2 class="elementor-heading-title elementor-size-default">HISTORY<\/h2>/gi, '')
@@ -186,6 +193,7 @@ export const getMenuItems = async () => {
       href: '/consortium',
       children: [
         linkFor('capacity-building-scheme', 'CAPACITY BUILDING SCHEME'),
+        linkFor('consortium-members', 'Consortium Members'),
       ],
     },
     linkFor('faqs', 'FAQs'),

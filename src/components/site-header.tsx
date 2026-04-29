@@ -2,7 +2,28 @@ import Link from 'next/link';
 import { getManagedMenu } from '@/lib/site-config';
 
 export default async function SiteHeader() {
-  const menuItems = (await getManagedMenu()).filter((item) => {
+  const menuItems = (await getManagedMenu()).map((item) => {
+    const isConsortium = item.label.trim().toLowerCase() === 'consortium' || item.href.trim().toLowerCase() === '/consortium';
+    if (!isConsortium) return item;
+
+    const children = item.children ?? [];
+    const hasConsortiumMembers = children.some((child) => child.href.trim().toLowerCase() === '/consortium-members');
+
+    if (hasConsortiumMembers) return item;
+
+    return {
+      ...item,
+      children: [
+        ...children,
+        {
+          id: 'consortium-members',
+          label: 'Consortium Members',
+          href: '/consortium-members',
+          order: 999,
+        },
+      ],
+    };
+  }).filter((item) => {
     const normalizedLabel = item.label.trim().toLowerCase();
     const normalizedHref = item.href.trim().toLowerCase();
     return normalizedLabel !== 'faqs' && normalizedHref !== '/faqs';
