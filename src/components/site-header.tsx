@@ -2,7 +2,11 @@ import Link from 'next/link';
 import { getManagedMenu } from '@/lib/site-config';
 
 export default async function SiteHeader() {
-  const menuItems = await getManagedMenu();
+  const menuItems = (await getManagedMenu()).filter((item) => {
+    const normalizedLabel = item.label.trim().toLowerCase();
+    const normalizedHref = item.href.trim().toLowerCase();
+    return normalizedLabel !== 'faqs' && normalizedHref !== '/faqs';
+  });
 
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">

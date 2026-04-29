@@ -112,7 +112,24 @@ export const getPostBySlug = async (slug: string) => {
 
 export const getPageBySlug = async (slug: string) => {
   const pages = await getAllPages();
-  return pages.find((page) => page.slug === slug) ?? null;
+  const page = pages.find((item) => item.slug === slug);
+  if (!page) return null;
+
+  if (slug === 'history') {
+    const sanitizedContent = page.content
+      .replace(/<h2 class="elementor-heading-title elementor-size-default">HISTORY<\/h2>/gi, '')
+      .replace(
+        /<section class="elementor-section elementor-top-section elementor-element elementor-element-2da6bbd[\s\S]*?<\/section>/gi,
+        '',
+      );
+
+    return {
+      ...page,
+      content: sanitizedContent,
+    };
+  }
+
+  return page;
 };
 
 type MenuItem = {
