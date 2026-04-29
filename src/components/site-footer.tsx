@@ -12,7 +12,6 @@ export default function SiteFooter() {
             </p>
           </section>
           <section>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-blue-100">Quick Links</h3>
             <ul className="mt-3 space-y-2 text-sm">
               <li><Link className="hover:underline" href="/about-2">About</Link></li>
               <li><Link className="hover:underline" href="/pgc-visayas-services">Services</Link></li>
@@ -21,10 +20,9 @@ export default function SiteFooter() {
             </ul>
           </section>
           <section>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-blue-100">Contact</h3>
             <p className="mt-3 text-sm text-blue-100">University of the Philippines Visayas</p>
-            <p className="text-sm text-blue-100">Iloilo City, Philippines</p>
-            <p className="mt-2 text-sm text-blue-100">Email: info@pgc.upv.edu.ph</p>
+            <p className="text-sm text-blue-100">Miag-ao, Iloilo, Philippines</p>
+            <p className="mt-2 text-sm text-blue-100">Email: pgc.upvisayas@up.edu.ph</p>
           </section>
         </div>
       </div>
