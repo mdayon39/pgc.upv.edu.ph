@@ -33,6 +33,17 @@ export default async function DynamicPage({ params }: Props) {
   const isConsortiumMembers = slug === 'consortium-members';
   const isTeam = slug === 'team';
   const isOpportunities = slug === 'opportunities';
+  const useCompactTitleSize = new Set([
+    'opportunities',
+    'about-2',
+    'history',
+    'mision-vision',
+    'team',
+    'pgc-visayas-services',
+    'services-sequencing-services',
+    'services-bioinformatics-laboratory-services',
+    'services-laboratory-equipment',
+  ]).has(slug);
 
   if (RESERVED.has(slug)) {
     notFound();
@@ -114,7 +125,7 @@ export default async function DynamicPage({ params }: Props) {
             {!isCapacityBuilding && (
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-6 md:p-12 text-center">
                 <h1
-                  className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
+                  className={`${useCompactTitleSize ? 'text-3xl md:text-4xl' : 'text-3xl md:text-5xl lg:text-6xl'} font-extrabold text-white drop-shadow-lg leading-tight`}
                   dangerouslySetInnerHTML={{ __html: resolvedPage.title }}
                 />
               </div>
@@ -125,7 +136,7 @@ export default async function DynamicPage({ params }: Props) {
           {!resolvedPage.featuredImage && !isConsortiumMembers && !isTeam && (
             <header className="mb-12 text-center border-b border-gray-200 pb-10">
               <h1 
-                className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#002B5B] leading-tight" 
+                className={`${useCompactTitleSize ? 'text-3xl md:text-4xl' : 'text-3xl md:text-5xl lg:text-6xl'} font-extrabold text-[#002B5B] leading-tight`} 
                 dangerouslySetInnerHTML={{ __html: resolvedPage.title }} 
               />
             </header>
@@ -134,7 +145,7 @@ export default async function DynamicPage({ params }: Props) {
           {isTeam ? (
             <section>
               <header className="mb-12 text-center">
-                <h1 className="text-3xl font-extrabold text-[#002B5B] md:text-5xl">Team</h1>
+                <h1 className="text-3xl font-extrabold text-[#002B5B] md:text-4xl">Team</h1>
               </header>
               {(() => {
                 const grouped = teamMembers.reduce((acc, member) => {
