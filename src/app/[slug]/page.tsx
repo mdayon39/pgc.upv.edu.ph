@@ -37,8 +37,16 @@ export default async function DynamicPage({ params }: Props) {
   }
 
   const page = await getPageBySlug(slug);
+  const resolvedPage = page ?? (isConsortiumMembers
+    ? {
+        title: 'Consortium Members',
+        excerpt: '',
+        content: '',
+        featuredImage: null,
+      }
+    : null);
 
-  if (!page) {
+  if (!resolvedPage) {
     notFound();
   }
 
@@ -57,29 +65,29 @@ export default async function DynamicPage({ params }: Props) {
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-10">
       <article className={`rounded-2xl border shadow-lg overflow-hidden transition-all ${isConsortiumMembers ? 'bg-[#ececec]' : 'bg-white'}`}>
-        {page.featuredImage && !isConsortiumMembers && (
+        {resolvedPage.featuredImage && !isConsortiumMembers && (
           <div className={`relative w-full ${isCapacityBuilding ? 'h-[360px] md:h-[640px] bg-white' : 'h-[300px] md:h-[480px]'}`}>
             <img
-              src={page.featuredImage}
-              alt={page.title}
+              src={resolvedPage.featuredImage}
+              alt={resolvedPage.title}
               className={`w-full h-full ${isCapacityBuilding ? 'object-contain object-[50%_58%]' : 'object-cover'}`}
             />
             {!isCapacityBuilding && (
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-6 md:p-12 text-center">
                 <h1
                   className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
-                  dangerouslySetInnerHTML={{ __html: page.title }}
+                  dangerouslySetInnerHTML={{ __html: resolvedPage.title }}
                 />
               </div>
             )}
           </div>
         )}
         <div className="p-6 md:p-16">
-          {!page.featuredImage && !isConsortiumMembers && (
+          {!resolvedPage.featuredImage && !isConsortiumMembers && (
             <header className="mb-12 text-center border-b border-gray-200 pb-10">
               <h1 
                 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#002B5B] leading-tight" 
-                dangerouslySetInnerHTML={{ __html: page.title }} 
+                dangerouslySetInnerHTML={{ __html: resolvedPage.title }} 
               />
             </header>
           )}
@@ -108,7 +116,7 @@ export default async function DynamicPage({ params }: Props) {
               </div>
             </section>
           ) : (
-            <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: page.content || page.excerpt }} />
+            <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: resolvedPage.content || resolvedPage.excerpt }} />
           )}
         </div>
       </article>
