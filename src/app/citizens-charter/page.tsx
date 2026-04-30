@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import PDFFlipbook from '@/components/pdf-flipbook';
 
 const PDF_PATH = '/assets/About/CitizensCharter/2026CitizensCharterPGCVisayas.pdf';
 
@@ -20,8 +19,30 @@ export default function CitizensCharterPage() {
           </p>
         </header>
 
-        <div className="mt-8">
-          <PDFFlipbook pdfUrl={PDF_PATH} />
+        <div className="mb-6 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href={PDF_PATH}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full bg-[#0f4f7c] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0b3d61]"
+          >
+            Open PDF
+          </a>
+          <a
+            href={PDF_PATH}
+            download
+            className="rounded-full border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+          >
+            Download PDF
+          </a>
+        </div>
+
+        <div className="overflow-hidden rounded-xl border border-slate-200">
+          <iframe
+            title="PGC Visayas 2026 Citizen's Charter PDF"
+            src={PDF_PATH}
+            className="h-[78vh] w-full"
+          />
         </div>
       </article>
     </main>
