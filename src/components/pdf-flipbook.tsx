@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import * as pdfjsLib from 'pdfjs-dist';
 
-// Set up PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
+// Set up PDF.js worker from unpkg CDN
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.js`;
 
 interface PDFFlipbookProps {
   pdfUrl: string;
@@ -16,6 +16,7 @@ export default function PDFFlipbook({ pdfUrl, title }: PDFFlipbookProps) {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pages, setPages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [isFlipping, setIsFlipping] = useState<boolean>(false);
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
@@ -24,7 +25,19 @@ export default function PDFFlipbook({ pdfUrl, title }: PDFFlipbookProps) {
     const loadPdf = async () => {
       try {
         setLoading(true);
-        const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
+        
+        // Construct full URL for PDF.js
+        const fullUrl = pdfUrl.startsWith('http') 
+          ? pdfUrl 
+          : `${typeof window !== 'undefined' ? window.location.origin : ''}${pdfUrl}`;
+        
+        console.log('Loading PDF from:', fullUrl);
+        
+        const pdf = await pdfjsLib.getDocument({
+          url: fullUrl,
+          cMapUrl: `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/cmaps/`,
+          cMapPacked: true,
+        }).promise;
         setNumPages(pdf.numPages);
 
         const pageImages: string[] = [];
@@ -51,7 +64,9 @@ export default function PDFFlipbook({ pdfUrl, title }: PDFFlipbookProps) {
 
         setPages(pageImages);
       } catch (error) {
+        const errorMsg = error instanceof Error ? error.message : String(error);
         console.error('Error loading PDF:', error);
+        setError(`Failed to load PDF: ${errorMsg}`);
       } finally {
         setLoading(false);
       }
@@ -109,6 +124,14 @@ export default function PDFFlipbook({ pdfUrl, title }: PDFFlipbookProps) {
           <div className="mb-3 h-8 w-8 animate-spin rounded-full border-4 border-slate-300 border-t-[#0f4f7c] mx-auto" />
           <p className="text-slate-600">Loading PDF...</p>
         </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-96 items-center justify-center rounded-xl border border-red-200 bg-red-50">
+        <p className="text-red-600 text-center px-4">{error}</p>
       </div>
     );
   }
