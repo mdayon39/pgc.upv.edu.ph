@@ -54,9 +54,6 @@ function ContactDetails({ title }: ContactDetailsProps) {
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
       <h1 className="font-[var(--font-roboto-slab)] text-3xl font-bold text-[#002560] md:text-4xl">{title}</h1>
-      <p className="mt-4 text-base leading-relaxed text-slate-600 md:text-lg">
-        Reach PGC Visayas through the channels below for service requests and official inquiries.
-      </p>
 
       <div className="mt-8 rounded-xl border border-slate-200 bg-white p-4">
         <h2 className="text-sm font-bold uppercase tracking-[0.08em] text-slate-700">Location</h2>
