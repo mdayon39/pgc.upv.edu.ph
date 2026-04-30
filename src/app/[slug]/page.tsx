@@ -142,6 +142,7 @@ export default async function DynamicPage({ params }: Props) {
   const serviceDetailsContent = {
     'services-sequencing-services': {
       overview: 'Get high-quality raw sequence data and quality reports by having sequencing analysis performed in accordance with PGC Visayas established guidelines and best practices.',
+      capabilitiesHeading: 'Sequencing Capabilities',
       capabilities: [
         {
           title: 'Capillary Sequencing',
@@ -149,7 +150,12 @@ export default async function DynamicPage({ params }: Props) {
           description: 'Sanger sequencing and fragment analysis made simple and economical without affecting performance or quality. Ideal for small-scale projects and targeted sequencing.',
           image: '/uploads/2022/10/SeqStudio-scaled.jpg',
           imageAlt: 'SeqStudio Genetic Analyzer',
-          kits: [] as string[],
+          highlightsLabel: 'Service Scope',
+          highlights: [
+            'Sanger sequencing',
+            'Fragment analysis',
+            'Fast turnaround for targeted sequencing',
+          ],
         },
         {
           title: 'Next Generation Sequencing (NGS)',
@@ -157,7 +163,8 @@ export default async function DynamicPage({ params }: Props) {
           description: 'High-throughput sequencing with multiple reagent kit options for diverse project scales and requirements.',
           image: '/uploads/2022/10/IMG_5465-B1-scaled-e1665539017947.jpg',
           imageAlt: 'Illumina iSeq 100 Next Generation Sequencer',
-          kits: [
+          highlightsLabel: 'Available Reagent Kits',
+          highlights: [
             'Illumina iSeq 100 i1 Reagent v2 Kit (300 cycles)',
             'Illumina NextSeq 1000 P2 Reagent v3 Kit (100 cycles)',
             'P2 Reagent v3 Kit (200 cycles)',
@@ -186,6 +193,95 @@ export default async function DynamicPage({ params }: Props) {
           description: 'Apply for our internship program and work directly in our laboratory on real research projects.',
           buttonText: 'Explore Internships',
           buttonHref: '/opportunities',
+        },
+      ],
+    },
+    'services-bioinformatics-laboratory-services': {
+      overview:
+        'Clients can get accurate, in-depth insights from next-generation sequencing datasets through robust analysis pipelines. PGC Visayas Bioinformatics Laboratory infrastructure includes an HPC cluster with 120 cores (240 threads), 640GB RAM, and 360TB storage, plus high-performance workstations for end-to-end analysis support.',
+      capabilitiesHeading: 'Bioinformatics Service Areas',
+      capabilities: [
+        {
+          title: 'DNA Barcoding',
+          technology: 'Species Identification Workflow',
+          description:
+            'Rapid species identification using DNA sequence signatures to recognize known species and accelerate discovery of new species.',
+          image: '/uploads/2022/11/PGC-Visayas-Website-Icons-1.png',
+          imageAlt: 'DNA barcoding icon',
+          highlightsLabel: 'Services',
+          highlights: [
+            'Rapid species identification',
+            'Identification of unknown material',
+            'Species authentication',
+          ],
+        },
+        {
+          title: 'Metagenomics',
+          technology: 'Microbial Community Profiling',
+          description:
+            'Community-level genomics analysis focused on species diversity, gene composition, and functional pathways for environment-specific studies.',
+          image: '/uploads/2022/11/PGC-Visayas-Website-Icons.png',
+          imageAlt: 'Metagenomics icon',
+          highlightsLabel: 'Services',
+          highlights: [
+            'Species composition and abundance analysis',
+            'Genome component analysis',
+            'Non-redundant gene catalog generation',
+            'Functional annotation and comparative analysis',
+          ],
+        },
+        {
+          title: 'Transcriptomics',
+          technology: 'RNA Expression Analysis',
+          description:
+            'Comprehensive characterization of transcriptional activity to identify candidate genes and expression markers linked to traits of interest.',
+          image: '/uploads/2022/11/2-1.png',
+          imageAlt: 'Transcriptomics icon',
+          highlightsLabel: 'Services',
+          highlights: [
+            'Expressed gene identification',
+            'Gene structure determination',
+            'Absolute and relative expression quantification',
+            'Differential expression and pathway analysis',
+          ],
+        },
+        {
+          title: 'Whole Genome Analysis',
+          technology: 'Reference-based and De Novo Workflows',
+          description:
+            'Whole genome sequence analysis for variant discovery, annotation, and comparative genomics across characterized and novel genomes.',
+          image: '/uploads/2022/11/3-1.png',
+          imageAlt: 'Whole genome analysis icon',
+          highlightsLabel: 'Services',
+          highlights: [
+            'Genome assembly support',
+            'Variant calling and annotation',
+            'Comparative genomics analyses',
+            'Custom workflow development',
+          ],
+        },
+      ],
+      ctas: [
+        {
+          id: 'contact-bioinfo',
+          title: 'Request Bioinformatics Support',
+          description: 'Discuss your sequencing dataset and project goals with our bioinformatics team.',
+          buttonText: 'Contact Us',
+          buttonHref: '/contact',
+        },
+        {
+          id: 'training-bioinfo',
+          title: 'Join Training Programs',
+          description: 'Enroll in analysis and basic programming or bash scripting training sessions.',
+          buttonText: 'View Opportunities',
+          buttonHref: '/opportunities',
+        },
+        {
+          id: 'services-overview',
+          title: 'Explore Other Services',
+          description: 'Browse our full omics and equipment service offerings for your research workflow.',
+          buttonText: 'Back to Services',
+          buttonHref: '/pgc-visayas-services',
         },
       ],
     },
@@ -341,7 +437,9 @@ export default async function DynamicPage({ params }: Props) {
 
                   {/* Capabilities Section */}
                   <div>
-                    <h2 className="mb-6 text-2xl font-bold text-[#002B5B]">Sequencing Capabilities</h2>
+                    <h2 className="mb-6 text-2xl font-bold text-[#002B5B]">
+                      {serviceDetailsContent[slug as keyof typeof serviceDetailsContent]?.capabilitiesHeading}
+                    </h2>
                     <div className="grid gap-6 md:grid-cols-2">
                       {serviceDetailsContent[slug as keyof typeof serviceDetailsContent]?.capabilities.map((cap) => (
                         <div key={cap.title} className="rounded-lg border border-slate-200 bg-white shadow-sm overflow-hidden">
@@ -363,13 +461,13 @@ export default async function DynamicPage({ params }: Props) {
                               </div>
                             </div>
                             <p className="mt-3 text-slate-700">{cap.description}</p>
-                            {cap.kits && cap.kits.length > 0 && (
+                            {cap.highlights && cap.highlights.length > 0 && (
                               <div className="mt-4">
-                                <h4 className="font-semibold text-slate-900">Available Reagent Kits:</h4>
+                                <h4 className="font-semibold text-slate-900">{cap.highlightsLabel}:</h4>
                                 <ul className="mt-2 space-y-1">
-                                  {cap.kits.map((kit) => (
-                                    <li key={kit} className="text-sm text-slate-700">
-                                      • {kit}
+                                  {cap.highlights.map((item) => (
+                                    <li key={item} className="text-sm text-slate-700">
+                                      • {item}
                                     </li>
                                   ))}
                                 </ul>
