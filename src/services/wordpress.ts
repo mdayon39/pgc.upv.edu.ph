@@ -313,12 +313,9 @@ export const getMenuItems = async () => {
       label: 'SERVICES',
       href: '/pgc-visayas-services',
       children: [
-        linkFor('services-sequencing-services', 'Sequencing'),
-        linkFor('services-laboratory-equipment', 'Laboratory Equipment'),
-        linkFor('sample-storage', 'Sample Storage'),
-        linkFor('services-retail-services', 'Retail Services'),
-        linkFor('services-sample-processing-service', 'Sample Processing'),
-        linkFor('services-bioinformatics-laboratory-services', 'Bioinformatics Services'),
+        linkFor('services-sequencing-services', 'Omics Laboratory Services'),
+        linkFor('services-bioinformatics-laboratory-services', 'Bioinformatics Laboratory Services'),
+        linkFor('services-laboratory-equipment', 'Equipment Catalog'),
       ],
     },
     {
