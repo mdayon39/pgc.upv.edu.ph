@@ -49,20 +49,16 @@ export default async function DynamicPage({ params }: Props) {
             <img
               src={page.featuredImage}
               alt={page.title}
-              className={`w-full h-full ${isCapacityBuilding ? 'object-contain p-4 md:p-8' : 'object-cover'}`}
+              className={`w-full h-full ${isCapacityBuilding ? 'object-contain' : 'object-cover'}`}
             />
-            <div
-              className={`absolute inset-x-0 p-6 md:p-12 text-center ${
-                isCapacityBuilding
-                  ? 'top-0 bg-gradient-to-b from-black/60 to-transparent'
-                  : 'bottom-0 bg-gradient-to-t from-black/60 to-transparent'
-              }`}
-            >
-              <h1 
-                className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg leading-tight" 
-                dangerouslySetInnerHTML={{ __html: page.title }} 
-              />
-            </div>
+            {!isCapacityBuilding && (
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-6 md:p-12 text-center">
+                <h1
+                  className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-lg leading-tight"
+                  dangerouslySetInnerHTML={{ __html: page.title }}
+                />
+              </div>
+            )}
           </div>
         )}
         <div className="p-6 md:p-16">
