@@ -147,11 +147,16 @@ export default async function DynamicPage({ params }: Props) {
           title: 'Capillary Sequencing',
           technology: 'SeqStudio Genetic Analyzer',
           description: 'Sanger sequencing and fragment analysis made simple and economical without affecting performance or quality. Ideal for small-scale projects and targeted sequencing.',
+          image: '/uploads/2022/10/SeqStudio-scaled.jpg',
+          imageAlt: 'SeqStudio Genetic Analyzer',
+          kits: [] as string[],
         },
         {
           title: 'Next Generation Sequencing (NGS)',
           technology: 'Illumina iSeq 100 & NextSeq 1000',
           description: 'High-throughput sequencing with multiple reagent kit options for diverse project scales and requirements.',
+          image: '/uploads/2022/10/IMG_5465-B1-scaled-e1665539017947.jpg',
+          imageAlt: 'Illumina iSeq 100 Next Generation Sequencer',
           kits: [
             'Illumina iSeq 100 i1 Reagent v2 Kit (300 cycles)',
             'Illumina NextSeq 1000 P2 Reagent v3 Kit (100 cycles)',
@@ -337,28 +342,40 @@ export default async function DynamicPage({ params }: Props) {
                   {/* Capabilities Section */}
                   <div>
                     <h2 className="mb-6 text-2xl font-bold text-[#002B5B]">Sequencing Capabilities</h2>
-                    <div className="space-y-4">
+                    <div className="grid gap-6 md:grid-cols-2">
                       {serviceDetailsContent[slug as keyof typeof serviceDetailsContent]?.capabilities.map((cap) => (
-                        <div key={cap.title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
-                          <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-                            <div className="flex-1">
-                              <h3 className="text-lg font-bold text-[#002B5B]">{cap.title}</h3>
-                              <p className="mt-1 text-sm text-slate-600">{cap.technology}</p>
-                            </div>
-                          </div>
-                          <p className="mt-3 text-slate-700">{cap.description}</p>
-                          {cap.kits && cap.kits.length > 0 && (
-                            <div className="mt-4">
-                              <h4 className="font-semibold text-slate-900">Available Reagent Kits:</h4>
-                              <ul className="mt-2 space-y-1">
-                                {cap.kits.map((kit) => (
-                                  <li key={kit} className="text-sm text-slate-700">
-                                    • {kit}
-                                  </li>
-                                ))}
-                              </ul>
+                        <div key={cap.title} className="rounded-lg border border-slate-200 bg-white shadow-sm overflow-hidden">
+                          {cap.image && (
+                            <div className="w-full overflow-hidden bg-slate-100 h-52">
+                              <img
+                                src={cap.image}
+                                alt={cap.imageAlt ?? cap.title}
+                                loading="lazy"
+                                className="h-full w-full object-cover"
+                              />
                             </div>
                           )}
+                          <div className="p-6">
+                            <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                              <div className="flex-1">
+                                <h3 className="text-lg font-bold text-[#002B5B]">{cap.title}</h3>
+                                <p className="mt-1 text-sm text-slate-600">{cap.technology}</p>
+                              </div>
+                            </div>
+                            <p className="mt-3 text-slate-700">{cap.description}</p>
+                            {cap.kits && cap.kits.length > 0 && (
+                              <div className="mt-4">
+                                <h4 className="font-semibold text-slate-900">Available Reagent Kits:</h4>
+                                <ul className="mt-2 space-y-1">
+                                  {cap.kits.map((kit) => (
+                                    <li key={kit} className="text-sm text-slate-700">
+                                      • {kit}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       ))}
                     </div>
