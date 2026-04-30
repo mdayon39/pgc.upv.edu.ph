@@ -135,6 +135,10 @@ export const getPageBySlug = async (slug: string) => {
       .replace(
         /<section class="elementor-section elementor-top-section elementor-element elementor-element-10f69f3[\s\S]*?<\/section>/gi,
         '',
+      )
+      .replace(
+        /<section class="elementor-section elementor-top-section elementor-element elementor-element-a16050f[\s\S]*?<\/section>/gi,
+        '',
       );
 
     return {
