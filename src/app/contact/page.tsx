@@ -52,7 +52,7 @@ type ContactDetailsProps = {
 
 function ContactDetails({ title }: ContactDetailsProps) {
   return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+    <section>
       <h1 className="text-center font-[var(--font-roboto-slab)] text-3xl font-bold text-[#002560] md:text-4xl">{title}</h1>
 
       <div className="mt-8 rounded-xl border border-slate-200 bg-white p-4">
@@ -146,15 +146,23 @@ export default async function ContactPage() {
   if (!page) {
     // If migration didn't capture the contact page content, we still show the full contact module.
     return (
-      <main className="mx-auto w-full max-w-7xl px-4 py-12 md:py-16">
-        <ContactDetails title="Contact Us" />
+      <main className="mx-auto w-full max-w-7xl px-4 py-10">
+        <article className="rounded-2xl border bg-white shadow-lg overflow-hidden transition-all">
+          <div className="p-6 md:p-16">
+            <ContactDetails title="Contact Us" />
+          </div>
+        </article>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto w-full max-w-7xl px-4 py-12 md:py-16">
-      <ContactDetails title={pageTitle} />
+    <main className="mx-auto w-full max-w-7xl px-4 py-10">
+      <article className="rounded-2xl border bg-white shadow-lg overflow-hidden transition-all">
+        <div className="p-6 md:p-16">
+          <ContactDetails title={pageTitle} />
+        </div>
+      </article>
     </main>
   );
 }
