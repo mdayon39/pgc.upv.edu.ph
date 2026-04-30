@@ -31,6 +31,7 @@ type NormalizedItem = {
 export type TeamMember = {
   id: string;
   name: string;
+  department: string;
   role: string;
   order: number;
   image: string;
@@ -99,6 +100,7 @@ const normalizeTeamMember = (member: Partial<TeamMember>, index: number): TeamMe
   return {
     id: (member.id ?? '').trim() || `team-${index + 1}`,
     name,
+    department: (member.department ?? '').trim(),
     role: (member.role ?? '').trim(),
     order: Number.isFinite(member.order) ? Number(member.order) : index + 1,
     image: derivedImage,
