@@ -69,7 +69,7 @@ export default async function DynamicPage({ params }: Props) {
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-10">
-      <article className={`rounded-2xl border shadow-lg overflow-hidden transition-all ${isConsortiumMembers ? 'bg-[#ececec]' : 'bg-white'}`}>
+      <article className="rounded-2xl border bg-white shadow-lg overflow-hidden transition-all">
         {resolvedPage.featuredImage && !isConsortiumMembers && !isTeam && (
           <div className={`relative w-full ${isCapacityBuilding ? 'aspect-[2400/2175] bg-white' : 'h-[300px] md:h-[480px]'}`}>
             <img
