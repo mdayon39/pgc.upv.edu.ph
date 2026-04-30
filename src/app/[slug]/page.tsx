@@ -35,6 +35,10 @@ export default async function DynamicPage({ params }: Props) {
   const isOpportunities = slug === 'opportunities';
   const isAbout = slug === 'about-2';
   const isServices = slug === 'pgc-visayas-services';
+  const isServiceDetail =
+    slug === 'services-sequencing-services' ||
+    slug === 'services-bioinformatics-laboratory-services' ||
+    slug === 'services-laboratory-equipment';
   const useCompactTitleSize = new Set([
     'opportunities',
     'about-2',
@@ -134,6 +138,53 @@ export default async function DynamicPage({ params }: Props) {
       href: '/services-laboratory-equipment',
     },
   ];
+
+  const serviceDetailsContent = {
+    'services-sequencing-services': {
+      overview: 'Get high-quality raw sequence data and quality reports by having sequencing analysis performed in accordance with PGC Visayas established guidelines and best practices.',
+      capabilities: [
+        {
+          title: 'Capillary Sequencing',
+          technology: 'SeqStudio Genetic Analyzer',
+          description: 'Sanger sequencing and fragment analysis made simple and economical without affecting performance or quality. Ideal for small-scale projects and targeted sequencing.',
+        },
+        {
+          title: 'Next Generation Sequencing (NGS)',
+          technology: 'Illumina iSeq 100 & NextSeq 1000',
+          description: 'High-throughput sequencing with multiple reagent kit options for diverse project scales and requirements.',
+          kits: [
+            'Illumina iSeq 100 i1 Reagent v2 Kit (300 cycles)',
+            'Illumina NextSeq 1000 P2 Reagent v3 Kit (100 cycles)',
+            'P2 Reagent v3 Kit (200 cycles)',
+            'P2 Reagent v3 Kit (300 cycles)',
+          ],
+        },
+      ],
+      ctas: [
+        {
+          id: 'contact',
+          title: 'Ready to get started?',
+          description: 'Contact our core facility team with any questions about our services or to discuss your project needs.',
+          buttonText: 'Contact Us',
+          buttonHref: '/contact',
+        },
+        {
+          id: 'training',
+          title: 'Expand Your Skills',
+          description: 'Join our training programs and improve your expertise in genome sequencing techniques.',
+          buttonText: 'Learn About Training',
+          buttonHref: '/opportunities',
+        },
+        {
+          id: 'internship',
+          title: 'Gain Practical Experience',
+          description: 'Apply for our internship program and work directly in our laboratory on real research projects.',
+          buttonText: 'Explore Internships',
+          buttonHref: '/opportunities',
+        },
+      ],
+    },
+  };
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-10">
@@ -273,6 +324,68 @@ export default async function DynamicPage({ params }: Props) {
                   </article>
                 ))}
               </div>
+            </section>
+          ) : isServiceDetail ? (
+            <section className="mx-auto max-w-4xl space-y-12">
+              {serviceDetailsContent[slug as keyof typeof serviceDetailsContent] ? (
+                <>
+                  {/* Overview Section */}
+                  <div className="prose prose-sm max-w-none rounded-xl bg-slate-50 p-6 md:p-8">
+                    <p className="text-base leading-relaxed text-slate-700">{serviceDetailsContent[slug as keyof typeof serviceDetailsContent]?.overview}</p>
+                  </div>
+
+                  {/* Capabilities Section */}
+                  <div>
+                    <h2 className="mb-6 text-2xl font-bold text-[#002B5B]">Sequencing Capabilities</h2>
+                    <div className="space-y-4">
+                      {serviceDetailsContent[slug as keyof typeof serviceDetailsContent]?.capabilities.map((cap) => (
+                        <div key={cap.title} className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+                          <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
+                            <div className="flex-1">
+                              <h3 className="text-lg font-bold text-[#002B5B]">{cap.title}</h3>
+                              <p className="mt-1 text-sm text-slate-600">{cap.technology}</p>
+                            </div>
+                          </div>
+                          <p className="mt-3 text-slate-700">{cap.description}</p>
+                          {cap.kits && cap.kits.length > 0 && (
+                            <div className="mt-4">
+                              <h4 className="font-semibold text-slate-900">Available Reagent Kits:</h4>
+                              <ul className="mt-2 space-y-1">
+                                {cap.kits.map((kit) => (
+                                  <li key={kit} className="text-sm text-slate-700">
+                                    • {kit}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA Section */}
+                  <div>
+                    <h2 className="mb-6 text-2xl font-bold text-[#002B5B]">Next Steps</h2>
+                    <div className="grid gap-4 md:grid-cols-3">
+                      {serviceDetailsContent[slug as keyof typeof serviceDetailsContent]?.ctas.map((cta) => (
+                        <div key={cta.id} className="flex flex-col rounded-lg border border-slate-300 bg-white p-5 hover:shadow-md transition-shadow">
+                          <h3 className="font-bold text-slate-900">{cta.title}</h3>
+                          <p className="mt-2 flex-1 text-sm text-slate-600">{cta.description}</p>
+                          <a
+                            href={cta.buttonHref}
+                            className="mt-4 inline-block rounded-lg bg-[#0f4f7c] px-3 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0b3d61] w-full"
+                          >
+                            {cta.buttonText}
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: rawBodyHtml }} />
+              )}
             </section>
           ) : isAbout ? null : isCapacityBuilding && !hasBodyContent ? null : (
             <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: rawBodyHtml }} />
