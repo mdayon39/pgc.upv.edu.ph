@@ -33,6 +33,7 @@ export default async function DynamicPage({ params }: Props) {
   const isConsortiumMembers = slug === 'consortium-members';
   const isTeam = slug === 'team';
   const isOpportunities = slug === 'opportunities';
+  const isAbout = slug === 'about-2';
   const useCompactTitleSize = new Set([
     'opportunities',
     'about-2',
@@ -232,7 +233,7 @@ export default async function DynamicPage({ params }: Props) {
                 ))}
               </div>
             </section>
-          ) : isCapacityBuilding && !hasBodyContent ? null : (
+          ) : isAbout ? null : isCapacityBuilding && !hasBodyContent ? null : (
             <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: rawBodyHtml }} />
           )}
         </div>
