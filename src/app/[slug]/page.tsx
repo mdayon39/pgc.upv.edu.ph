@@ -113,6 +113,7 @@ export default async function DynamicPage({ params }: Props) {
                 const deptOrder = [
                   'Administrative Staff',
                   'Linkages, Extension & Quality Assurance',
+                  'Communications & Public Relations Section',
                   'PGC Visayas Core Facility - Omics Laboratory',
                   'PGC Visayas Core Facility - Bioinformatics Laboratory',
                 ];
