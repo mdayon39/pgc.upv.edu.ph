@@ -122,6 +122,28 @@ export const getPageBySlug = async (slug: string) => {
     };
   }
 
+  if (slug === 'capacity-building-scheme') {
+    const sanitizedContent = page.content
+      .replace(
+        /<section class="elementor-section elementor-top-section elementor-element elementor-element-a86a37e[\s\S]*?<\/section>/gi,
+        '',
+      )
+      .replace(
+        /<section class="elementor-section elementor-top-section elementor-element elementor-element-7c45730[\s\S]*?<\/section>/gi,
+        '',
+      )
+      .replace(
+        /<section class="elementor-section elementor-top-section elementor-element elementor-element-10f69f3[\s\S]*?<\/section>/gi,
+        '',
+      );
+
+    return {
+      ...page,
+      featuredImage: '/assets/CapacityBuildingScheme/capacity-building-scheme.JPG',
+      content: sanitizedContent,
+    };
+  }
+
   if (slug === 'history') {
     const sanitizedContent = page.content
       .replace(/<h2 class="elementor-heading-title elementor-size-default">HISTORY<\/h2>/gi, '')
