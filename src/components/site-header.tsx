@@ -3,6 +3,33 @@ import { getManagedMenu } from '@/lib/site-config';
 
 export default async function SiteHeader() {
   const menuItems = (await getManagedMenu()).map((item) => {
+    const isServices = item.label.trim().toLowerCase() === 'services' || item.href.trim().toLowerCase() === '/pgc-visayas-services';
+    if (isServices) {
+      return {
+        ...item,
+        children: [
+          {
+            id: 'services-omics-lab',
+            label: 'Omics Laboratory Services',
+            href: '/services-sequencing-services',
+            order: 1,
+          },
+          {
+            id: 'services-bioinformatics-lab',
+            label: 'Bioinformatics Laboratory Services',
+            href: '/services-bioinformatics-laboratory-services',
+            order: 2,
+          },
+          {
+            id: 'services-equipment-catalog',
+            label: 'Equipment Catalog',
+            href: '/services-laboratory-equipment',
+            order: 3,
+          },
+        ],
+      };
+    }
+
     const isConsortium = item.label.trim().toLowerCase() === 'consortium' || item.href.trim().toLowerCase() === '/consortium';
     if (!isConsortium) return item;
 
