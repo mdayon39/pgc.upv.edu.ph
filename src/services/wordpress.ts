@@ -30,6 +30,75 @@ type NormalizedItem = {
 
 const DATA_DIR = path.join(process.cwd(), 'public', 'data');
 
+const TEAM_IMAGE_BY_LAST_NAME: Record<string, string> = {
+  aquino: '/assets/Team/aquino.JPG',
+  bernas: '/assets/Team/bernas.JPG',
+  calumpang: '/assets/Team/calumpang.JPG',
+  cartago: '/assets/Team/cartago.JPG',
+  cayanan: '/assets/Team/cayanan.JPG',
+  dayon: '/assets/Team/dayon.JPG',
+  ferriols: '/assets/Team/ferriols.JPG',
+  florece: '/assets/Team/florece.JPG',
+  garcia: '/assets/Team/garcia.JPG',
+  jareno: '/assets/Team/jareno.JPG',
+  javier: '/assets/Team/javier.JPG',
+  juanico: '/assets/Team/juanico.JPG',
+  lojera: '/assets/Team/lojera.JPG',
+  mabaquiao: '/assets/Team/mabaquiao.JPG',
+  mosura: '/assets/Team/mosura.JPG',
+  mueda: '/assets/Team/mueda.JPG',
+  nim: '/assets/Team/nim.JPG',
+  noblezada: '/assets/Team/noblezada.JPG',
+  penuela: '/assets/Team/penuela.JPG',
+  secondes: '/assets/Team/secondes.JPG',
+  tenizo: '/assets/Team/tenizo.JPG',
+  tomugdan: '/assets/Team/tomugdan.JPG',
+  velo: '/assets/Team/velo.JPG',
+};
+
+const decodeHtmlEntities = (value: string) => value
+  .replace(/&#8217;/g, "'")
+  .replace(/&#038;/g, '&')
+  .replace(/&amp;/g, '&')
+  .replace(/&ntilde;/gi, 'n');
+
+const getTeamImagePath = (displayName: string) => {
+  const normalized = decodeHtmlEntities(displayName)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z\s-]/g, ' ')
+    .trim();
+
+  const ignoredTokens = new Set(['ph', 'd', 'md']);
+  const tokens = normalized.split(/[\s-]+/).filter(Boolean);
+
+  for (let index = tokens.length - 1; index >= 0; index -= 1) {
+    const token = tokens[index];
+    if (ignoredTokens.has(token)) continue;
+
+    const match = TEAM_IMAGE_BY_LAST_NAME[token];
+    if (match) return match;
+  }
+
+  return null;
+};
+
+const replaceTeamImages = (html: string) => html.replace(
+  /<img\b[^>]*>\s*<\/div>\s*<\/div>\s*<div class="elementor-element[^"]*elementor-widget-text-editor[^"]*"[^>]*>\s*<div class="elementor-widget-container">\s*<p>(?:<strong>)?([^<]+?)(?:<\/strong>)?<\/p>/gi,
+  (match, name: string) => {
+    const imagePath = getTeamImagePath(name);
+    if (!imagePath) return match;
+
+    const safeAlt = decodeHtmlEntities(name).replace(/"/g, '&quot;');
+
+    return match.replace(
+      /<img\b[^>]*>/i,
+      `<img src="${imagePath}" class="elementor-animation-float attachment-large size-large" alt="${safeAlt}" loading="lazy" />`,
+    );
+  },
+);
+
 const rewriteMediaUrls = (html: string) => {
   if (!html) return '';
 
@@ -159,6 +228,13 @@ export const getPageBySlug = async (slug: string) => {
     return {
       ...page,
       content: sanitizedContent,
+    };
+  }
+
+  if (slug === 'team') {
+    return {
+      ...page,
+      content: replaceTeamImages(page.content),
     };
   }
 
