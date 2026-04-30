@@ -28,7 +28,12 @@ export default async function SiteHeader() {
     });
     const hasConsortiumMembers = children.some((child) => child.href.trim().toLowerCase() === '/consortium-members');
 
-    if (hasConsortiumMembers) return item;
+    if (hasConsortiumMembers) {
+      return {
+        ...item,
+        children,
+      };
+    }
 
     return {
       ...item,
