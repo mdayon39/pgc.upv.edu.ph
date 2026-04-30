@@ -50,6 +50,9 @@ export default async function DynamicPage({ params }: Props) {
     notFound();
   }
 
+  const rawBodyHtml = resolvedPage.content || resolvedPage.excerpt;
+  const hasBodyContent = rawBodyHtml.replace(/<[^>]+>/g, '').trim().length > 0;
+
   const consortiumInstitutions = [
     'Western Philippines University',
     'Carlos Hilado Memorial State University',
@@ -66,11 +69,11 @@ export default async function DynamicPage({ params }: Props) {
     <main className="mx-auto w-full max-w-7xl px-4 py-10">
       <article className={`rounded-2xl border shadow-lg overflow-hidden transition-all ${isConsortiumMembers ? 'bg-[#ececec]' : 'bg-white'}`}>
         {resolvedPage.featuredImage && !isConsortiumMembers && (
-          <div className={`relative w-full ${isCapacityBuilding ? 'h-[360px] md:h-[640px] bg-white' : 'h-[300px] md:h-[480px]'}`}>
+          <div className={`relative w-full ${isCapacityBuilding ? 'aspect-[2400/2175] bg-white' : 'h-[300px] md:h-[480px]'}`}>
             <img
               src={resolvedPage.featuredImage}
               alt={resolvedPage.title}
-              className={`w-full h-full ${isCapacityBuilding ? 'object-contain object-[50%_58%]' : 'object-cover'}`}
+              className={`w-full h-full ${isCapacityBuilding ? 'object-contain object-center' : 'object-cover'}`}
             />
             {!isCapacityBuilding && (
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-6 md:p-12 text-center">
@@ -82,7 +85,7 @@ export default async function DynamicPage({ params }: Props) {
             )}
           </div>
         )}
-        <div className="p-6 md:p-16">
+        <div className={isCapacityBuilding && !hasBodyContent ? 'p-0' : 'p-6 md:p-16'}>
           {!resolvedPage.featuredImage && !isConsortiumMembers && (
             <header className="mb-12 text-center border-b border-gray-200 pb-10">
               <h1 
@@ -115,8 +118,8 @@ export default async function DynamicPage({ params }: Props) {
                 />
               </div>
             </section>
-          ) : (
-            <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: resolvedPage.content || resolvedPage.excerpt }} />
+          ) : isCapacityBuilding && !hasBodyContent ? null : (
+            <div className="content-html max-w-4xl mx-auto" dangerouslySetInnerHTML={{ __html: rawBodyHtml }} />
           )}
         </div>
       </article>
