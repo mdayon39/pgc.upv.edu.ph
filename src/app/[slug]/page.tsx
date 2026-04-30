@@ -32,6 +32,7 @@ export default async function DynamicPage({ params }: Props) {
   const isCapacityBuilding = slug === 'capacity-building-scheme';
   const isConsortiumMembers = slug === 'consortium-members';
   const isTeam = slug === 'team';
+  const isOpportunities = slug === 'opportunities';
 
   if (RESERVED.has(slug)) {
     notFound();
@@ -65,6 +66,39 @@ export default async function DynamicPage({ params }: Props) {
     'Silliman University',
     'Southern Leyte State University',
     'University of St. La Salle',
+  ];
+
+  const opportunitiesItems = [
+    {
+      id: 'trainings',
+      title: 'Trainings',
+      content: [
+        'PGC Visayas provides trainings to students, researchers, faculty members, and health professionals to improve their skills involved in genome sequencing.',
+      ],
+    },
+    {
+      id: 'tour-visits',
+      title: 'Tour/Visits',
+      content: [
+        'For tour information and to book a tour at PGC Visayas, please send us a letter of request at pgc.upvisayas@up.edu.ph.',
+        'Tours must be booked a minimum of two weeks in advance and addressed to:',
+        'Victor Marco Emmanuel N. Ferriols, Ph.D.\nAssistant to the Executive Director - Visayas\nPhilippine Genome Center',
+      ],
+    },
+    {
+      id: 'student-internship',
+      title: 'Student Internship',
+      content: [
+        'Students who wish to fully immerse themselves in genomics research can apply for the PGC Visayas Student Internship Program. It places a strong emphasis on knowledge dissemination, laboratory discovery, and career advancement.',
+      ],
+    },
+    {
+      id: 'job-opportunities',
+      title: 'Job Opportunities',
+      content: [
+        'Currently, there are no job openings. To stay informed about future career opportunities, follow us on our social media accounts.',
+      ],
+    },
   ];
 
   return (
@@ -166,6 +200,25 @@ export default async function DynamicPage({ params }: Props) {
                   alt="Consortium member institutions logos"
                   className="h-auto w-full object-contain"
                 />
+              </div>
+            </section>
+          ) : isOpportunities ? (
+            <section className="mx-auto max-w-6xl">
+              <p className="mb-8 text-center text-slate-600">Explore available learning, engagement, and career pathways at PGC Visayas.</p>
+
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                {opportunitiesItems.map((item) => (
+                  <article key={item.id} className="flex h-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
+                    <h3 className="border-b border-slate-200 pb-3 text-xl font-bold text-slate-900">{item.title}</h3>
+                    <div className="mt-4 space-y-4 text-slate-700">
+                      {item.content.map((paragraph) => (
+                        <p key={paragraph} className="whitespace-pre-line text-[15px] leading-relaxed">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </article>
+                ))}
               </div>
             </section>
           ) : isCapacityBuilding && !hasBodyContent ? null : (
