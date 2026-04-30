@@ -307,6 +307,10 @@ export const getMenuItems = async () => {
         linkFor('history', 'History'),
         linkFor('mision-vision', 'Mission & Vision'),
         linkFor('team', 'Team'),
+        {
+          label: "Citizen's Charter",
+          href: '/citizens-charter',
+        },
       ],
     },
     {

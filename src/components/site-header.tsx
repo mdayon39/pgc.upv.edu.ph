@@ -3,6 +3,29 @@ import { getManagedMenu } from '@/lib/site-config';
 
 export default async function SiteHeader() {
   const menuItems = (await getManagedMenu()).map((item) => {
+    const isAbout = item.label.trim().toLowerCase() === 'about' || item.href.trim().toLowerCase() === '/about-2';
+    if (isAbout) {
+      const children = item.children ?? [];
+      const hasCitizensCharter = children.some((child) => child.href.trim().toLowerCase() === '/citizens-charter');
+
+      if (hasCitizensCharter) {
+        return item;
+      }
+
+      return {
+        ...item,
+        children: [
+          ...children,
+          {
+            id: 'citizens-charter',
+            label: "Citizen's Charter",
+            href: '/citizens-charter',
+            order: 999,
+          },
+        ],
+      };
+    }
+
     const isServices = item.label.trim().toLowerCase() === 'services' || item.href.trim().toLowerCase() === '/pgc-visayas-services';
     if (isServices) {
       return {
