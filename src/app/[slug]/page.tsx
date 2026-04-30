@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getAllPages, getPageBySlug } from '@/services/wordpress';
+import { getAllPages, getPageBySlug, getTeamMembers } from '@/services/wordpress';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -31,6 +31,7 @@ export default async function DynamicPage({ params }: Props) {
   const { slug } = await params;
   const isCapacityBuilding = slug === 'capacity-building-scheme';
   const isConsortiumMembers = slug === 'consortium-members';
+  const isTeam = slug === 'team';
 
   if (RESERVED.has(slug)) {
     notFound();
@@ -52,6 +53,7 @@ export default async function DynamicPage({ params }: Props) {
 
   const rawBodyHtml = resolvedPage.content || resolvedPage.excerpt;
   const hasBodyContent = rawBodyHtml.replace(/<[^>]+>/g, '').trim().length > 0;
+  const teamMembers = isTeam ? await getTeamMembers() : [];
 
   const consortiumInstitutions = [
     'Western Philippines University',
@@ -68,7 +70,7 @@ export default async function DynamicPage({ params }: Props) {
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-10">
       <article className={`rounded-2xl border shadow-lg overflow-hidden transition-all ${isConsortiumMembers ? 'bg-[#ececec]' : 'bg-white'}`}>
-        {resolvedPage.featuredImage && !isConsortiumMembers && (
+        {resolvedPage.featuredImage && !isConsortiumMembers && !isTeam && (
           <div className={`relative w-full ${isCapacityBuilding ? 'aspect-[2400/2175] bg-white' : 'h-[300px] md:h-[480px]'}`}>
             <img
               src={resolvedPage.featuredImage}
@@ -86,7 +88,7 @@ export default async function DynamicPage({ params }: Props) {
           </div>
         )}
         <div className={isCapacityBuilding && !hasBodyContent ? 'p-0' : 'p-6 md:p-16'}>
-          {!resolvedPage.featuredImage && !isConsortiumMembers && (
+          {!resolvedPage.featuredImage && !isConsortiumMembers && !isTeam && (
             <header className="mb-12 text-center border-b border-gray-200 pb-10">
               <h1 
                 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#002B5B] leading-tight" 
@@ -95,7 +97,29 @@ export default async function DynamicPage({ params }: Props) {
             </header>
           )}
 
-          {isConsortiumMembers ? (
+          {isTeam ? (
+            <section>
+              <header className="mb-10 text-center">
+                <h1 className="text-3xl font-extrabold text-[#002B5B] md:text-5xl">Team</h1>
+              </header>
+              <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {teamMembers.map((member) => (
+                  <li key={member.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                    <div className="overflow-hidden rounded-xl bg-slate-100">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="aspect-square h-auto w-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h2 className="mt-4 text-lg font-bold text-slate-900">{member.name}</h2>
+                    {member.role ? <p className="mt-1 text-sm text-slate-600">{member.role}</p> : null}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : isConsortiumMembers ? (
             <section className="grid items-start gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-12">
               <div>
                 <h2 className="text-2xl font-bold leading-tight text-black md:text-[44px]">

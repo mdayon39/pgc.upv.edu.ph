@@ -1,0 +1,170 @@
+[
+  {
+    "id": "ferriols",
+    "name": "Victor Marco Emmanuel N. Ferriols",
+    "role": "Assistant To The Executive Director - Visayas Satellite Facility Philippine Genome Center",
+    "order": 1,
+    "image": "/assets/Team/ferriols.JPG"
+  },
+  {
+    "id": "garcia",
+    "name": "Sherill C. Garcia",
+    "role": "Administrative Aide",
+    "order": 2,
+    "image": "/assets/Team/garcia.JPG"
+  },
+  {
+    "id": "nim",
+    "name": "Arlie F. Nim",
+    "role": "Senior Research Aide",
+    "order": 3,
+    "image": "/assets/Team/nim.JPG"
+  },
+  {
+    "id": "tomugdan",
+    "name": "Denise B. Tomugdan",
+    "role": "Senior Office Assistant",
+    "order": 4,
+    "image": "/assets/Team/tomugdan.JPG"
+  },
+  {
+    "id": "tomugdan",
+    "name": "Denise B. Tomugdan",
+    "role": "Senior Office Assistant",
+    "order": 5,
+    "image": "/assets/Team/tomugdan.JPG"
+  },
+  {
+    "id": "juanico",
+    "name": "Claire Samantha T. Juanico",
+    "role": "Project Development Officer (PDO)",
+    "order": 6,
+    "image": "/assets/Team/juanico.JPG"
+  },
+  {
+    "id": "bernas",
+    "name": "Andrea Danica Bernas",
+    "role": "University Extension Associate (UEA)",
+    "order": 7,
+    "image": "/assets/Team/bernas.JPG"
+  },
+  {
+    "id": "javier",
+    "name": "Ma. Carmel F. Javier",
+    "role": "University Researcher (UR)",
+    "order": 8,
+    "image": "/assets/Team/javier.JPG"
+  },
+  {
+    "id": "cartago",
+    "name": "Nadelene Faith N. Cartago",
+    "role": "University Research Associate I (URA)",
+    "order": 9,
+    "image": "/assets/Team/cartago.JPG"
+  },
+  {
+    "id": "velo",
+    "name": "Jasmine C. Velo",
+    "role": "University Research Associate I (URA)",
+    "order": 10,
+    "image": "/assets/Team/velo.JPG"
+  },
+  {
+    "id": "cayanan",
+    "name": "Alex B. Cayanan",
+    "role": "Junior Research Assistant",
+    "order": 11,
+    "image": "/assets/Team/cayanan.JPG"
+},
+  {
+    "id": "jareño",
+    "name": "Pee Jee V. Jareño",
+    "role": "DOST - Career Incentive Program (CIP) Research Fellow (Omics)",
+    "order": 12,
+    "image": "/assets/Team/jareno.JPG"
+  },
+  {
+    "id": "calumpang",
+    "name": "Carla Lenore F. Calumpang",
+    "role": "DOST - Career Incentive Program (CIP) Research Fellow (Omics)",
+    "order": 13,
+    "image": "/assets/Team/calumpang.JPG"
+  },
+  {
+    "id": "mosura",
+    "name": "Steven Mark C. Mosura",
+    "role": "Senior Research Associate (SRA)",
+    "order": 14,
+    "image": "/assets/Team/mosura.JPG"
+  },
+  {
+    "id": "penuela",
+    "name": "Dianne Frances P.Penuela",
+    "role": "Senior Research Associate (SRA)",
+    "order": 15,
+    "image": "/assets/Team/penuela.JPG"
+  },
+  {
+    "id": "secondes",
+    "name": "Xemenes Mei A. Secondes",
+    "role": "Senior Research Associate (SRA)",
+    "order": 16,
+    "image": "/assets/Team/secondes.JPG"
+  },
+  {
+    "id": "mabaquiao",
+    "name": "Lee Genesis S. Mabaquiao",
+    "role": "Senior Research Associate (SRA)",
+    "order": 17,
+    "image": "/assets/Team/mabaquiao.JPG"
+  },
+  {
+    "id": "aquino",
+    "name": "Jee E. Aquino",
+    "role": "Senior Research Associate (SRA)",
+    "order": 18,
+    "image": "/assets/Team/aquino.JPG"
+  },
+  {
+    "id": "noblezada",
+    "name": "Albert Noblezada",
+    "role": "Science Research Specialist II (SRS II)",
+    "order": 19,
+    "image": "/assets/Team/noblezada.JPG"
+  },
+  {
+    "id": "tenizo",
+    "name": "Karl Angelo P. Tenizo",
+    "role": "University Research Associate I (URA)",
+    "order": 20,
+    "image": "/assets/Team/tenizo.JPG"
+  },
+  {
+    "id": "dayon",
+    "name": "Merlito A. Dayon Jr.",
+    "role": "(Systems Administrator) PHILOmics Project",
+    "order": 21,
+    "image": "/assets/Team/dayon.JPG"
+  },
+  {
+    "id": "mueda",
+    "name": "Camille Rose T. Mueda",
+    "role": "Senior Research Associate (SRA)",
+    "order": 22,
+    "image": "/assets/Team/mueda.JPG"
+  },
+  {
+    "id": "lojera",
+    "name": "CMicah Danielle D. Lojera",
+    "role": "Senior Research Associate (SRA)",
+    "order": 23,
+    "image": "/assets/Team/lojera.JPG"
+  },
+  {
+    "id": "florece",
+    "name": "Christine Marie Florece",
+    "role": "DOST - Career Incentive Program (CIP) Research Fellow (Bioinformatics)",
+    "order": 4,
+    "image": "/assets/Team/florece.JPG"
+  }
+]

@@ -28,6 +28,14 @@ type NormalizedItem = {
   parent: number;
 };
 
+export type TeamMember = {
+  id: string;
+  name: string;
+  role: string;
+  order: number;
+  image: string;
+};
+
 const DATA_DIR = path.join(process.cwd(), 'public', 'data');
 
 const TEAM_IMAGE_BY_LAST_NAME: Record<string, string> = {
@@ -82,6 +90,19 @@ const getTeamImagePath = (displayName: string) => {
   }
 
   return null;
+};
+
+const normalizeTeamMember = (member: Partial<TeamMember>, index: number): TeamMember => {
+  const name = (member.name ?? '').trim();
+  const derivedImage = member.image?.trim() || getTeamImagePath(name) || '/assets/Team/bernas.JPG';
+
+  return {
+    id: (member.id ?? '').trim() || `team-${index + 1}`,
+    name,
+    role: (member.role ?? '').trim(),
+    order: Number.isFinite(member.order) ? Number(member.order) : index + 1,
+    image: derivedImage,
+  };
 };
 
 const replaceTeamImages = (html: string) => html.replace(
@@ -140,6 +161,14 @@ const normalizeEntity = (item: WpEntity): NormalizedItem => ({
 const readJson = async <T>(fileName: string): Promise<T> => {
   const raw = await readFile(path.join(DATA_DIR, fileName), 'utf8');
   return JSON.parse(raw) as T;
+};
+
+export const getTeamMembers = async (): Promise<TeamMember[]> => {
+  const members = await readJson<Array<Partial<TeamMember>>>('team.json');
+  return members
+    .map(normalizeTeamMember)
+    .filter((member) => member.name.length > 0)
+    .sort((a, b) => a.order - b.order);
 };
 
 export const getAllPosts = async (): Promise<NormalizedItem[]> => {
