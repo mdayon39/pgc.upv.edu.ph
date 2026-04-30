@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 
 interface Slide {
   image: string;
@@ -59,33 +58,6 @@ export default function HomeSlider() {
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(7,22,40,0.88)_0%,rgba(7,22,40,0.74)_42%,rgba(7,22,40,0.38)_74%,rgba(7,22,40,0.2)_100%)]" />
-          <div className="absolute inset-0 flex items-center">
-            <div className="mx-auto w-full max-w-7xl px-4 text-white">
-              <div className="max-w-3xl rounded-2xl border border-white/15 bg-white/8 p-6 shadow-2xl backdrop-blur-sm animate-in fade-in slide-in-from-left-4 duration-700 md:p-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-blue-100 md:text-sm">Philippine Genome Center Visayas</p>
-                <h2 className="mt-4 font-[var(--font-roboto-slab)] text-3xl font-bold leading-tight text-white md:text-6xl">
-                  {slide.title}
-                </h2>
-                <p className="mt-5 max-w-2xl text-base leading-relaxed text-blue-50 md:text-xl">
-                  {slide.description}
-                </p>
-                <div className="mt-8 flex flex-wrap gap-3 md:mt-10">
-                  <Link
-                    href={slide.link}
-                    className="rounded-full bg-[#1f8fd6] px-7 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-[#1978b4]"
-                  >
-                    Learn More
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="rounded-full border border-white/45 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white transition-colors hover:bg-white/15"
-                  >
-                    Contact Us
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       ))}
 
