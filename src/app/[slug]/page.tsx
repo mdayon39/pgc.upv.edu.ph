@@ -34,6 +34,7 @@ export default async function DynamicPage({ params }: Props) {
   const isTeam = slug === 'team';
   const isOpportunities = slug === 'opportunities';
   const isAbout = slug === 'about-2';
+  const isServices = slug === 'pgc-visayas-services';
   const useCompactTitleSize = new Set([
     'opportunities',
     'about-2',
@@ -110,6 +111,27 @@ export default async function DynamicPage({ params }: Props) {
       content: [
         'Currently, there are no job openings. To stay informed about future career opportunities, follow us on our social media accounts.',
       ],
+    },
+  ];
+
+  const servicesItems = [
+    {
+      id: 'omics-lab',
+      title: 'Omics Laboratory Services',
+      description: 'Professional sequencing and genomic analysis services using cutting-edge technology and expert protocols.',
+      href: '/services-sequencing-services',
+    },
+    {
+      id: 'bioinformatics-lab',
+      title: 'Bioinformatics Laboratory Services',
+      description: 'Advanced data analysis, sequence interpretation, and computational support for genomic research.',
+      href: '/services-bioinformatics-laboratory-services',
+    },
+    {
+      id: 'equipment-catalog',
+      title: 'Equipment Catalog',
+      description: 'Access our comprehensive catalog of laboratory equipment available for research projects.',
+      href: '/services-laboratory-equipment',
     },
   ];
 
@@ -229,6 +251,25 @@ export default async function DynamicPage({ params }: Props) {
                         </p>
                       ))}
                     </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          ) : isServices ? (
+            <section className="mx-auto max-w-6xl">
+              <p className="mb-8 text-center text-slate-600">Explore our comprehensive range of genomic research services and laboratory facilities.</p>
+
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {servicesItems.map((item) => (
+                  <article key={item.id} className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
+                    <h3 className="text-xl font-bold text-[#002B5B]">{item.title}</h3>
+                    <p className="mt-3 flex-1 text-slate-600">{item.description}</p>
+                    <a
+                      href={item.href}
+                      className="mt-4 inline-block rounded-lg bg-[#0f4f7c] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0b3d61]"
+                    >
+                      Learn More
+                    </a>
                   </article>
                 ))}
               </div>
