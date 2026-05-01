@@ -11,19 +11,19 @@ interface Slide {
 
 const slides: Slide[] = [
   {
-    image: 'https://pgc.upv.edu.ph/wp-content/uploads/2024/07/5-1-scaled.jpg',
+    image: 'https://i0.wp.com/pgc.upv.edu.ph/wp-content/uploads/2024/07/5-1-scaled.jpg?fit=2560%2C1229&ssl=1',
     title: 'Advancing Genomics Research in Western Visayas',
     description: 'Providing world-class genomics and bioinformatics services to the scientific community.',
     link: '/pgc-visayas-services',
   },
   {
-    image: 'https://pgc.upv.edu.ph/wp-content/uploads/2024/07/2-1-scaled.jpg',
+    image: 'https://i0.wp.com/pgc.upv.edu.ph/wp-content/uploads/2022/10/IMG_5535-1-scaled.jpg?fit=2560%2C1229&ssl=1',
     title: 'Supporting National Health Initiatives',
     description: 'Collaborating with national and international partners for public health genomics.',
     link: '/about-2',
   },
   {
-    image: 'https://pgc.upv.edu.ph/wp-content/uploads/2024/07/3-1-scaled.jpg',
+    image: 'https://i0.wp.com/pgc.upv.edu.ph/wp-content/uploads/2024/07/3-1-scaled.jpg?fit=2560%2C1229&ssl=1',
     title: 'Fisheries and Aquatic Research',
     description: 'Spearheading the utilization of omics in fisheries and aquatic research in the Philippines.',
     link: '/pgc-visayas-services',
@@ -66,6 +66,9 @@ export default function HomeSlider() {
             loading={index === 0 ? 'eager' : 'lazy'}
             fetchPriority={index === 0 ? 'high' : 'auto'}
             decoding="async"
+            onError={(event) => {
+              event.currentTarget.src = '/assets/ConsortiumMembers/consortium-members.JPG';
+            }}
             className={`h-full w-full object-cover will-change-transform transition-transform duration-[7000ms] ease-linear motion-reduce:transition-none ${
               index === current
                 ? index % 2 === 0
