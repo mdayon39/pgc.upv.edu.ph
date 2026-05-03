@@ -1,4 +1,10 @@
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
+const FlipbookPDF = dynamic(() => import('@/components/pdf-viewer/flipbook-pdf'), {
+  ssr: false,
+  loading: () => <div className="h-[600px] w-full animate-pulse bg-slate-100 rounded-xl" />
+});
 
 const PDF_PATH = '/assets/About/CitizensCharter/2026CitizensCharterPGCVisayas.pdf';
 
@@ -37,12 +43,8 @@ export default function CitizensCharterPage() {
           </a>
         </div>
 
-        <div className="overflow-hidden rounded-xl border border-slate-200">
-          <iframe
-            title="PGC Visayas 2026 Citizen's Charter PDF"
-            src={PDF_PATH}
-            className="h-[78vh] w-full"
-          />
+        <div className="overflow-hidden rounded-xl bg-slate-100 p-2 md:p-4">
+          <FlipbookPDF pdfUrl={PDF_PATH} />
         </div>
       </article>
     </main>
