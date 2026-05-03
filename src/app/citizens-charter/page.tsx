@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import FlipbookPDFLoader from '@/components/pdf-viewer/flipbook-pdf-loader';
+import SimplePDFViewer from '@/components/pdf-viewer/simple-pdf-viewer';
 
 const PDF_PATH = '/assets/About/CitizensCharter/2026CitizensCharterPGCVisayas.pdf';
 
@@ -39,7 +39,7 @@ export default function CitizensCharterPage() {
         </div>
 
         <div className="overflow-hidden rounded-xl bg-slate-100 p-2 md:p-4">
-          <FlipbookPDFLoader pdfUrl={PDF_PATH} />
+          <SimplePDFViewer pdfUrl={PDF_PATH} />
         </div>
       </article>
     </main>

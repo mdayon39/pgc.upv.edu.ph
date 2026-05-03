@@ -3,18 +3,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   compress: true,
-  transpilePackages: ['pdfjs-dist'],
-  webpack: (config, { isServer }) => {
-    // pdfjs-dist v4 requires canvas as an optional native dep; mock it for the
-    // server/edge bundles so the build doesn't fail when canvas isn't installed.
-    if (!isServer) {
-      config.resolve.alias = {
-        ...(config.resolve.alias as Record<string, unknown>),
-        canvas: false,
-      };
-    }
-    return config;
-  },
   async headers() {
     return [
       {
